@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:benmunrome": "node dist/benmunrome/server/server.mjs"
+    "serve:ssr:benmunrome": "node dist/benmunrome/server/server.mjs",
+    "build:ssr": "ng build --configuration production && ng run benmunrome:server"
   },
   "private": true,
   "dependencies": {
