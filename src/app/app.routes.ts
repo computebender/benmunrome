@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './view/home/home.component';
 
 export const routes: Routes = [
   {
@@ -12,8 +12,40 @@ export const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'article/:id/:slug',
+    path: 'blog',
     loadComponent: () =>
-      import('./article/article.component').then((mod) => mod.ArticleComponent),
+      import('./view/blog/blog.component').then((mod) => mod.BlogComponent),
+  },
+  {
+    path: 'blog/:id/:slug',
+    loadComponent: () =>
+      import('./view/article/article.component').then(
+        (mod) => mod.ArticleComponent
+      ),
+  },
+  {
+    path: 'about-me',
+    loadComponent: () =>
+      import('./view/about-me/about-me.component').then(
+        (mod) => mod.AboutMeComponent
+      ),
+  },
+  {
+    path: 'portfolio',
+    loadComponent: () =>
+      import('./view/portfolio/portfolio.component').then(
+        (mod) => mod.PortfolioComponent
+      ),
+  },
+  {
+    path: '404',
+    loadComponent: () =>
+      import('./view/page-not-found/page-not-found.component').then(
+        (mod) => mod.PageNotFoundComponent
+      ),
+  },
+  {
+    path: '**',
+    redirectTo: '404',
   },
 ];

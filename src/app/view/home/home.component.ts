@@ -1,8 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { ArticleService } from '../service/article.service';
-import { Article } from '../model/article.model';
 import { RouterLinkWithHref } from '@angular/router';
 import { ArticleCardGridComponent } from '../article/article-card-grid/article-card-grid.component';
+import { Article } from '../../model/article.model';
+import { ArticleService } from '../../service/article.service';
 
 @Component({
   selector: 'app-home',

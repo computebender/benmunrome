@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Article } from '../../model/article.model';
 import { ArticleCardComponent } from '../article-card/article-card.component';
+import { Article } from '../../../model/article.model';
 
 @Component({
   selector: 'app-article-card-grid',
