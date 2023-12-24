@@ -1,0 +1,5 @@
+<div class="grid grid-cols-4 gap-4">
+  @for (article of articles; track article.id) {
+  <app-article-card [article]="article" />
+  } @empty { Empty list of users }
+</div>
