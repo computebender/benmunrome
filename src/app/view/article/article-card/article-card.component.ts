@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Article } from '../../model/article.model';
 import { RouterLinkWithHref } from '@angular/router';
+import { Article } from '../../../model/article.model';
 
 @Component({
   selector: 'app-article-card',
