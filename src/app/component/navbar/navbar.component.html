@@ -1,8 +1,10 @@
-<div class="flex justify-between w-1/2">
-  @for (navbarLink of navbarLinks; track navbarLink.id) { @if
-  (!navbarLink.external) {
-  <a [routerLink]="[navbarLink.link]">{{ navbarLink.label }}</a>
-  } @else {
-  <a [href]="navbarLink.link" target="_blank">{{ navbarLink.label }}</a>
-  } }
+<div class="w-full flex justify-center">
+  <div class="flex justify-between w-1/2">
+    @for (navbarLink of navbarLinks; track navbarLink.id) { @if
+    (!navbarLink.external) {
+    <a [routerLink]="[navbarLink.link]">{{ navbarLink.label }}</a>
+    } @else {
+    <a [href]="navbarLink.link" target="_blank">{{ navbarLink.label }}</a>
+    } }
+  </div>
 </div>
