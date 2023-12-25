@@ -8,4 +8,6 @@ import { ParallaxDirective } from '../../directive/parallax/parallax.directive';
   templateUrl: './welcome-banner.component.html',
   styleUrl: './welcome-banner.component.scss',
 })
-export class WelcomeBannerComponent {}
+export class WelcomeBannerComponent {
+  lookingForWork = true;
+}
