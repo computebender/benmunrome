@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './view/home/home.component';
 
-export const routes: Routes = [
+export const appRoutes: Routes = [
   {
     path: '',
     pathMatch: 'full',
@@ -17,7 +17,7 @@ export const routes: Routes = [
       import('./view/blog/blog.component').then((mod) => mod.BlogComponent),
   },
   {
-    path: 'blog/:id/:slug',
+    path: 'blog/:articleId/:slug',
     loadComponent: () =>
       import('./view/article/article.component').then(
         (mod) => mod.ArticleComponent
