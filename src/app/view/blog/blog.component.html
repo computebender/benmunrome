@@ -1,1 +1,10 @@
 <p>blog works!</p>
+<ul>
+  @for(article of blogStore.entities(); track $index){
+  <li>
+    {{ article.title }}
+    {{ article.summary }}
+    {{ article.id }}
+  </li>
+  }
+</ul>

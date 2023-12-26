@@ -9,7 +9,7 @@ import { Article, ArticlesResponse } from '../model/article.model';
 export class ArticleService {
   private articlesUrl = 'assets/data/articles.json';
 
-  httpClient = inject(HttpClient);
+  private httpClient = inject(HttpClient);
 
   getArticles(): Observable<Article[]> {
     return this.httpClient
