@@ -1,5 +1,5 @@
 <div
-  class="relative flex justify-between py-40 px-8 border border-black rounded-xl overflow-hidden"
+  class="relative flex justify-between py-8 lg:py-40 px-8 border border-black rounded-xl overflow-hidden"
 >
   <div class="absolute inset-0 z-[-1]">
     <div appParallax [ratio]="0.9" class="absolute inset-0 -top-1/2">
@@ -25,9 +25,9 @@
     </div>
   </div>
 
-  <div class="flex justify-between">
+  <div class="flex justify-between flex-col-reverse lg:flex-row">
     <div
-      class="z-10 text-black bg-white font-semibold w-1/4 py-4 pl-4 pr-16 rounded-xl"
+      class="z-10 text-black bg-white font-semibold w-auto lg:w-1/4 py-4 pl-4 pr-16 rounded-xl"
     >
       <h1>Welcome,</h1>
       <p>
@@ -36,7 +36,9 @@
       </p>
     </div>
     @if(lookingForWork) {
-    <div class="z-10 bg-white border border-black rounded-xl p-4 w-1/4">
+    <div
+      class="z-10 bg-white border border-black rounded-xl p-4 w-auto lg:w-1/4"
+    >
       <h3>I'm looking for work!</h3>
       <p>
         I'm currently looking for a full-time position as a software developer.
