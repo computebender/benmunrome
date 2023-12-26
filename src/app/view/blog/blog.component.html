@@ -1,4 +1,13 @@
 <p>blog works!</p>
+
+@if(blogStore.activeArticle(); as article){
+{{ article.title }}
+{{ article.summary }}
+{{ article.id }}
+} @else {
+<p>no active article</p>
+}
+
 <ul>
   @for(article of blogStore.entities(); track $index){
   <li>
