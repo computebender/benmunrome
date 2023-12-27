@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { RouterLinkWithHref } from '@angular/router';
+import { RouterLinkActive, RouterLinkWithHref } from '@angular/router';
 import { navbarLinks } from './navbar-items';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLinkWithHref],
+  imports: [RouterLinkWithHref, RouterLinkActive],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })

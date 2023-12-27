@@ -6,7 +6,7 @@ interface NavbarItem {
 }
 
 export const navbarLinks: NavbarItem[] = [
-  { id: 1, label: 'Home', link: '/' },
+  { id: 1, label: 'Home', link: '/home' },
   { id: 2, label: 'Blog', link: '/blog' },
   { id: 3, label: 'About Me', link: '/about-me' },
   { id: 4, label: 'Porfolio', link: '/portfolio' },

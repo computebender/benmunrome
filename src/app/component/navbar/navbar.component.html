@@ -2,9 +2,20 @@
   <div class="flex justify-between w-1/2">
     @for (navbarLink of navbarLinks; track navbarLink.id) { @if
     (!navbarLink.external) {
-    <a [routerLink]="[navbarLink.link]">{{ navbarLink.label }}</a>
+    <a
+      [routerLink]="[navbarLink.link]"
+      class="no-underline text-slate-800 hover:text-slate-600 hover:underline underline-offset-8 text-2xl font-sans font-light"
+      routerLinkActive="!underline"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >{{ navbarLink.label }}</a
+    >
     } @else {
-    <a [href]="navbarLink.link" target="_blank">{{ navbarLink.label }}</a>
+    <a
+      [href]="navbarLink.link"
+      target="_blank"
+      class="no-underline text-slate-800 hover:text-slate-600 hover:underline underline-offset-8 text-2xl font-sans font-light"
+      >{{ navbarLink.label }}</a
+    >
     } }
   </div>
 </div>
