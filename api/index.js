@@ -1,3 +1,3 @@
-const server = require('../dist/benmunrome/server/main');
+const server = require('../dist/benmunrome/server/server');
 
 module.exports = server.app();
