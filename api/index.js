@@ -1,3 +1,3 @@
-const server = require('../dist/benmunrome/server/server');
+import { app } from '../dist/benmunrome/server/server.mjs';
 
-module.exports = server.app();
+export default app;
