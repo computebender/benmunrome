@@ -1,16 +1,14 @@
 @if(blogStore.activeArticle(); as article){
 <div class="flex flex-col items-center">
-  <div class="w-4/5 flex content-end items-end">
-    <h1 class="text-3xl font-bold underline">{{ article.title }}</h1>
-    <h2 class="ml-2">{{ article.date }}</h2>
+  <div class="flex content-end items-end w-full justify-between">
+    <h1 class="text-3xl font-medium underline">{{ article.title }}</h1>
+    <h2 class="text-xl ml-2 font-normal">{{ article.date }}</h2>
   </div>
 
-  <div
-    class="w-3/5 self-center border-solid border border-black rounded px-4 py-8"
-  >
+  <div class="self-center rounded py-8 mx-6 w-full">
     <markdown [src]="article.url"></markdown>
   </div>
 </div>
 } @else {
-<p>Article not found.</p>
+<p>Article not found. <a [routerLink]="['/blog']">Back to Blog.</a></p>
 }
