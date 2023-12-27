@@ -1,21 +1,47 @@
-<div class="w-full flex justify-center">
-  <div class="flex justify-between w-1/2">
-    @for (navbarLink of navbarLinks; track navbarLink.id) { @if
-    (!navbarLink.external) {
-    <a
-      [routerLink]="[navbarLink.link]"
-      class="no-underline text-slate-800 hover:text-slate-600 hover:underline underline-offset-8 text-2xl font-sans font-light"
-      routerLinkActive="!underline"
-      [routerLinkActiveOptions]="{ exact: true }"
-      >{{ navbarLink.label }}</a
-    >
+<ng-template #navLinks>
+  @for (navbarLink of navbarLinks; track navbarLink.id) {
+    @if (!navbarLink.external) {
+      <a
+        [routerLink]="[navbarLink.link]"
+        class="font-sans text-2xl font-light text-slate-800 no-underline underline-offset-8 hover:text-slate-600 hover:underline"
+        routerLinkActive="!underline"
+        (click)="hideMobileNav()"
+        >{{ navbarLink.label }}</a
+      >
     } @else {
-    <a
-      [href]="navbarLink.link"
-      target="_blank"
-      class="no-underline text-slate-800 hover:text-slate-600 hover:underline underline-offset-8 text-2xl font-sans font-light"
-      >{{ navbarLink.label }}</a
-    >
-    } }
+      <a
+        [href]="navbarLink.link"
+        target="_blank"
+        class="font-sans text-2xl font-light text-slate-800 no-underline underline-offset-8 hover:text-slate-600 hover:underline"
+        (click)="hideMobileNav()"
+        >{{ navbarLink.label }}</a
+      >
+    }
+  }
+</ng-template>
+
+<div class="mx-4 mt-4 flex items-center justify-between md:hidden">
+  <fa-icon
+    [icon]="faBars"
+    class="text-3xl text-slate-800 hover:text-slate-600"
+    (click)="toggleMobileNav()"
+  ></fa-icon>
+  <img src="/assets/image/b_logo.png" class="h-auto w-8" />
+</div>
+<div
+  [ngClass]="{
+    hidden: !mobileNavOpen,
+    flex: mobileNavOpen
+  }"
+  class="flex-col items-center gap-8 md:hidden"
+>
+  <ng-container *ngTemplateOutlet="navLinks" />
+</div>
+<div class="mt-12 hidden flex-col items-center gap-8 md:visible md:flex">
+  <img src="/assets/image/b_logo.png" class="h-auto w-20" />
+  <div class="flex w-full justify-center">
+    <div class="flex justify-between space-x-8 lg:space-x-20">
+      <ng-container *ngTemplateOutlet="navLinks" />
+    </div>
   </div>
 </div>
