@@ -14,11 +14,15 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { catchError, first } from 'rxjs';
 import { withDevtools } from '@angular-architects/ngrx-toolkit';
 
+interface BlogStoreState {
+  activeArticleId: string | undefined;
+}
+
 export const BlogStore = signalStore(
   { providedIn: 'root' },
   withDevtools('BlogStore'),
-  withState({
-    activeArticleId: '4e7cc743-6cab-452e-b462-3d521f2f4afb',
+  withState<BlogStoreState>({
+    activeArticleId: undefined,
   }),
   withEntities<Article>(),
   withComputed((state) => ({
