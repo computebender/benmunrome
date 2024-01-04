@@ -7,7 +7,8 @@ import { Article, ArticlesResponse } from '../model/article.model';
   providedIn: 'root',
 })
 export class ArticleService {
-  private articlesUrl = 'assets/data/articles.json';
+  private articlesUrl =
+    'https://raw.githubusercontent.com/computebender/benmunrome-articles/main/articles.json';
 
   private httpClient = inject(HttpClient);
 
