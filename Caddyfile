@@ -1,7 +1,3 @@
-benmunro.me {
-redir https://www.benmunro.me{uri}
-}
+benmunro.me
 
-www.benmunro.me {
 reverse_proxy app:4000
-}
