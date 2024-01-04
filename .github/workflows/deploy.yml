@@ -42,4 +42,4 @@ jobs:
             cd /var/www/benmunrome
             git pull origin main
             docker compose down
-            docker compose up -d
+            docker compose up --pull -d
