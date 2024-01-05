@@ -1,19 +1,19 @@
 <div
-  class="relative flex justify-between py-8 lg:py-40 px-8 border border-black rounded-xl overflow-hidden"
+  class="relative flex min-h-96 justify-between overflow-hidden rounded-xl border border-black px-8 py-8 md:min-h-min lg:py-40"
 >
   <div class="absolute inset-0 z-[-1]">
     <div appParallax [ratio]="0.7" class="absolute inset-0 -top-1/2">
       <img
         src="/assets/image/welcome_banner/city_silhouette.png"
         alt="Background Image 1"
-        class="w-full h-full object-cover"
+        class="h-full w-full object-cover"
       />
     </div>
     <div appParallax [ratio]="0.5" class="absolute inset-0 -top-1/2">
       <img
         src="/assets/image/welcome_banner/office_background.png"
         alt="Background Image 2"
-        class="w-full h-full object-cover"
+        class="h-full w-full object-cover"
       />
     </div>
     <div appParallax [ratio]="0.3" class="absolute inset-0 left-1/2 top-20">
@@ -25,27 +25,28 @@
     </div>
   </div>
 
-  <div class="flex justify-between flex-col-reverse lg:flex-row">
-    <div
-      class="z-10 text-black bg-white font-semibold w-auto lg:w-1/4 py-4 pl-4 pr-16 rounded-xl"
-    >
-      <h1>Welcome,</h1>
-      <p>
-        to my corner of the web! I'm a tech nerd from Ottawa, Canada. I love all
-        things programming, 3D printing, and smart home.
-      </p>
-    </div>
-    @if(lookingForWork) {
-    <div
-      class="z-10 bg-white border border-black rounded-xl p-4 w-auto lg:w-1/4"
-    >
-      <h3>I'm looking for work!</h3>
-      <p>
-        I'm currently looking for a full-time position as a software developer.
-        I'm interested in working with a team of passionate developers to build
-        interesting and challenging software.
-      </p>
-    </div>
+  <div class="flex flex-col justify-between md:flex-row">
+    @if (!lookingForWork) {
+      <div
+        class="z-10 w-auto rounded-xl bg-white py-4 pl-4 pr-16 font-semibold text-black md:w-1/4"
+      >
+        <h1>Welcome,</h1>
+        <p>
+          to my corner of the web! I'm a tech nerd from Ottawa, Canada. I love
+          all things programming, 3D printing, and smart home.
+        </p>
+      </div>
+    } @else {
+      <div
+        class="z-10 w-auto rounded-xl border border-black bg-white p-4 md:w-1/4"
+      >
+        <h3>I'm looking for work!</h3>
+        <p>
+          I'm currently looking for a full-time position as a software
+          developer. I'm interested in working with a team of passionate
+          developers to build interesting and challenging software.
+        </p>
+      </div>
     }
   </div>
 </div>
