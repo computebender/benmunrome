@@ -19,25 +19,24 @@ export class ParallaxDirective implements OnInit, OnDestroy {
   private eleRef = inject(ElementRef);
   private renderer = inject(Renderer2);
   private parallaxService = inject(ParallaxService);
+  private updateFunction: (scrollPosition: number) => void;
+
+  constructor() {
+    this.updateFunction = (scrollPosition) => {
+      const offset = scrollPosition * this.parallaxRatio;
+      this.renderer.setStyle(
+        this.eleRef.nativeElement,
+        'transform',
+        `translateY(${offset}px)`,
+      );
+    };
+  }
 
   ngOnInit(): void {
-    this.parallaxService.registerParallaxElement(
-      this.updateParallax.bind(this)
-    );
+    this.parallaxService.registerParallaxElement(this.updateFunction);
   }
 
   ngOnDestroy(): void {
-    this.parallaxService.unregisterParallaxElement(
-      this.updateParallax.bind(this)
-    );
-  }
-
-  private updateParallax(scrollPosition: number): void {
-    const offset = scrollPosition * this.parallaxRatio;
-    this.renderer.setStyle(
-      this.eleRef.nativeElement,
-      'transform',
-      `translateY(${offset}px)`
-    );
+    this.parallaxService.unregisterParallaxElement(this.updateFunction);
   }
 }

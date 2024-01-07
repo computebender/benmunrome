@@ -12,21 +12,21 @@ export class ParallaxService {
 
   constructor() {
     if (isPlatformBrowser(this.platformId)) {
-      window.addEventListener('scroll', this.onScroll.bind(this));
+      window.addEventListener('scroll', () => this.onScroll());
     }
   }
 
   registerParallaxElement(
-    updateFunction: (scrollPosition: number) => void
+    updateFunction: (scrollPosition: number) => void,
   ): void {
     this.parallaxElements.push(updateFunction);
   }
 
   unregisterParallaxElement(
-    updateFunction: (scrollPosition: number) => void
+    updateFunction: (scrollPosition: number) => void,
   ): void {
     this.parallaxElements = this.parallaxElements.filter(
-      (func) => func !== updateFunction
+      (func) => func !== updateFunction,
     );
   }
 
@@ -37,14 +37,14 @@ export class ParallaxService {
 
     this.scrollPosition = window.scrollY;
     if (!this.isScrolling) {
-      window.requestAnimationFrame(this.updateParallaxElements.bind(this));
+      window.requestAnimationFrame(() => this.updateParallaxElements());
       this.isScrolling = true;
     }
   }
 
   private updateParallaxElements(): void {
     this.parallaxElements.forEach((updateFunction) =>
-      updateFunction(this.scrollPosition)
+      updateFunction(this.scrollPosition),
     );
     this.isScrolling = false;
   }
