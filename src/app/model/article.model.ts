@@ -5,6 +5,7 @@ export interface Article {
   date: string;
   summary: string;
   slug: string;
+  isActive: boolean;
 }
 
 export interface ArticlesResponse {
