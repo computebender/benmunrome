@@ -10,12 +10,12 @@ import { addEntities, withEntities } from '@ngrx/signals/entities';
 import { Article } from '../model/article.model';
 import { computed, inject } from '@angular/core';
 import { ArticleService } from '../service/article.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { catchError, first } from 'rxjs';
 import { withDevtools } from '@angular-architects/ngrx-toolkit';
 
 interface BlogStoreState {
   currentArticleId: string | undefined;
+  featuredArticleIds: string[];
 }
 
 export const BlogStore = signalStore(
@@ -23,23 +23,27 @@ export const BlogStore = signalStore(
   withDevtools('BlogStore'),
   withState<BlogStoreState>({
     currentArticleId: undefined,
+    featuredArticleIds: [],
   }),
   withEntities<Article>(),
-  withComputed((state) => ({
+  withComputed(({ entities, currentArticleId, featuredArticleIds }) => ({
     currentArticle: computed(() =>
-      state
-        .entities()
-        .find((article) => article.id === state.currentArticleId()),
+      entities().find((article) => article.id === currentArticleId()),
     ),
     activeArticlesByDate: computed(() =>
-      state
-        .entities()
+      entities()
         .filter((article) => article.isActive)
         .sort((a, b) => {
           const aDate = new Date(a.date);
           const bDate = new Date(b.date);
           return bDate.getTime() - aDate.getTime();
         }),
+    ),
+    featuredArticles: computed(() =>
+      entities().filter(
+        (article) =>
+          featuredArticleIds().includes(article.id) && article.isActive,
+      ),
     ),
   })),
   withMethods((store) => {
@@ -66,10 +70,24 @@ export const BlogStore = signalStore(
           currentArticleId: articleId,
         });
       },
+      loadFeatuedArticleIds: () => {
+        articleService
+          .getFeaturedArticleIds()
+          .pipe(
+            first(),
+            catchError((error) => {
+              console.log('Error loading featured articles', error);
+              return [];
+            }),
+          )
+          .subscribe((ids) => {
+            patchState(store, { featuredArticleIds: ids });
+          });
+      },
     };
   }),
   withHooks({
-    onInit: ({ loadArticles }) => {
+    onInit: ({ loadArticles, loadFeatuedArticleIds }) => {
       loadArticles();
     },
   }),
