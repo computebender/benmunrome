@@ -4,6 +4,7 @@ import { ArticleCardGridComponent } from '../../component/article-card-grid/arti
 import { Article } from '../../model/article.model';
 import { ArticleService } from '../../service/article.service';
 import { WelcomeBannerComponent } from '../../component/welcome-banner/welcome-banner.component';
+import { BlogStore } from '../../store/blog.store';
 
 @Component({
   selector: 'app-home',
@@ -17,13 +18,9 @@ import { WelcomeBannerComponent } from '../../component/welcome-banner/welcome-b
   styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnInit {
-  articles: Article[] = [];
-
-  articleService = inject(ArticleService);
+  readonly blogStore = inject(BlogStore);
 
   ngOnInit() {
-    this.articleService.getArticles().subscribe((articles) => {
-      this.articles = articles;
-    });
+    this.blogStore.loadFeatuedArticleIds();
   }
 }
