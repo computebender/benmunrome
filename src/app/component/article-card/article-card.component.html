@@ -1,6 +1,19 @@
-<div class="p-6 border border-solid border-slate-600">
-  <p class="font-bold font-sans">{{ article.title }}</p>
-  <p>{{ article.summary }}</p>
-  <p>{{ article.id }}</p>
-  <a [routerLink]="['/blog', article.id, article.slug]">Article</a>
+<div
+  class="flex h-full cursor-pointer flex-col overflow-hidden rounded-lg border border-solid border-slate-300 transition-all hover:bg-slate-50 hover:shadow-lg active:bg-slate-100 active:shadow-md"
+  (click)="onCardClick()"
+>
+  <!-- Image Section -->
+  <div class="h-40 w-full shadow-md">
+    <img
+      [src]="article.coverImage || 'https://picsum.photos/300/200'"
+      alt="Article Image"
+      class="h-full w-full object-cover"
+    />
+  </div>
+
+  <!-- Text Section -->
+  <div class="grow px-4">
+    <h2 class="mb-2 truncate text-lg font-bold">{{ article.title }}</h2>
+    <p class="line-clamp-3 text-gray-600">{{ article.summary }}</p>
+  </div>
 </div>
