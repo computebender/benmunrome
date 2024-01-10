@@ -1,14 +1,14 @@
-@if(blogStore.activeArticle(); as article){
-<div class="flex flex-col items-center">
-  <div class="flex content-end items-end w-full justify-between">
-    <h1 class="text-3xl font-medium underline">{{ article.title }}</h1>
-    <h2 class="text-xl ml-2 font-normal">{{ article.date }}</h2>
-  </div>
+@if (blogStore.currentArticle(); as article) {
+  <div class="flex flex-col items-center">
+    <div class="flex w-full content-end items-end justify-between">
+      <h1 class="text-3xl font-medium underline">{{ article.title }}</h1>
+      <h2 class="ml-2 text-xl font-normal">{{ article.date }}</h2>
+    </div>
 
-  <div class="self-center rounded py-8 mx-6 w-full">
-    <markdown [src]="article.url"></markdown>
+    <div class="mx-6 w-full self-center rounded py-8">
+      <markdown [src]="article.url"></markdown>
+    </div>
   </div>
-</div>
 } @else {
-<p>Article not found. <a [routerLink]="['/blog']">Back to Blog.</a></p>
+  <p>Article not found. <a [routerLink]="['/blog']">Back to Blog.</a></p>
 }

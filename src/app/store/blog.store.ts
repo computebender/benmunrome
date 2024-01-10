@@ -15,19 +15,31 @@ import { catchError, first } from 'rxjs';
 import { withDevtools } from '@angular-architects/ngrx-toolkit';
 
 interface BlogStoreState {
-  activeArticleId: string | undefined;
+  currentArticleId: string | undefined;
 }
 
 export const BlogStore = signalStore(
   { providedIn: 'root' },
   withDevtools('BlogStore'),
   withState<BlogStoreState>({
-    activeArticleId: undefined,
+    currentArticleId: undefined,
   }),
   withEntities<Article>(),
   withComputed((state) => ({
-    activeArticle: computed(() =>
-      state.entities().find((article) => article.id === state.activeArticleId())
+    currentArticle: computed(() =>
+      state
+        .entities()
+        .find((article) => article.id === state.currentArticleId()),
+    ),
+    activeArticlesByDate: computed(() =>
+      state
+        .entities()
+        .filter((article) => article.isActive)
+        .sort((a, b) => {
+          const aDate = new Date(a.date);
+          const bDate = new Date(b.date);
+          return bDate.getTime() - aDate.getTime();
+        }),
     ),
   })),
   withMethods((store) => {
@@ -42,16 +54,16 @@ export const BlogStore = signalStore(
             catchError((error) => {
               console.log('Error loading articles', error);
               return [];
-            })
+            }),
           )
           .subscribe((articles) => patchState(store, addEntities(articles)));
       },
       addArticles: (articles: Article[]) => {
         patchState(store, addEntities(articles));
       },
-      setActiveArticleId: (articleId: string) => {
+      setCurrentArticleId: (articleId: string) => {
         patchState(store, {
-          activeArticleId: articleId,
+          currentArticleId: articleId,
         });
       },
     };
@@ -60,5 +72,5 @@ export const BlogStore = signalStore(
     onInit: ({ loadArticles }) => {
       loadArticles();
     },
-  })
+  }),
 );

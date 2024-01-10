@@ -20,6 +20,6 @@ export class ArticleComponent {
 
   @Input()
   set articleId(articleId: string) {
-    this.blogStore.setActiveArticleId(articleId);
+    this.blogStore.setCurrentArticleId(articleId);
   }
 }
