@@ -6,6 +6,7 @@ export interface Article {
   summary: string;
   slug: string;
   isActive: boolean;
+  coverImage?: string;
 }
 
 export interface ArticlesResponse {

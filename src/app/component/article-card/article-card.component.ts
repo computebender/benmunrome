@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { RouterLinkWithHref } from '@angular/router';
+import { Component, Input, inject } from '@angular/core';
+import { Router, RouterLinkWithHref } from '@angular/router';
 import { Article } from '../../model/article.model';
 
 @Component({
@@ -11,4 +11,10 @@ import { Article } from '../../model/article.model';
 })
 export class ArticleCardComponent {
   @Input({ required: true }) article!: Article;
+
+  private router = inject(Router);
+
+  onCardClick() {
+    this.router.navigate(['/blog', this.article.id, this.article.slug]);
+  }
 }
