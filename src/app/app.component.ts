@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { FooterComponent } from './component/footer/footer.component';
+import { navbarItems } from './navbar-items';
 
 @Component({
   selector: 'app-root',
@@ -19,4 +20,5 @@ import { FooterComponent } from './component/footer/footer.component';
 })
 export class AppComponent {
   title = 'benmunrome';
+  navbarItems = navbarItems;
 }

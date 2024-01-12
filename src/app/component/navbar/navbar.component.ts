@@ -1,10 +1,10 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { RouterLinkActive, RouterLinkWithHref } from '@angular/router';
-import { navbarLinks } from './navbar-items';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { CommonModule } from '@angular/common';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { NavbarItem } from '../../navbar-items';
 
 @Component({
   selector: 'app-navbar',
@@ -19,7 +19,9 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
   styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent implements OnInit {
-  navbarLinks = navbarLinks;
+  @Input()
+  navbarItems: NavbarItem[] = [];
+
   faBars = faBars;
   faTimes = faTimes;
   mobileNavOpen = false;
