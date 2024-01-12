@@ -4,7 +4,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { CommonModule } from '@angular/common';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { NavbarItem } from '../../navbar-items';
+import { NavbarItem } from '../../config/navbar-items';
 
 @Component({
   selector: 'app-navbar',

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NavbarItem } from '../../navbar-items';
+import { NavbarItem } from '../../config/navbar-items';
 import { RouterLinkWithHref } from '@angular/router';
 
 @Component({

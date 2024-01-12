@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { FooterComponent } from './component/footer/footer.component';
-import { navbarItems } from './navbar-items';
+import { navbarItems } from './config/navbar-items';
 
 @Component({
   selector: 'app-root',
