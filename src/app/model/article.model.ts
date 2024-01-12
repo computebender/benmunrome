@@ -2,7 +2,7 @@ export interface Article {
   id: string;
   title: string;
   url: string;
-  date: string;
+  date: Date;
   summary: string;
   slug: string;
   isActive: boolean;

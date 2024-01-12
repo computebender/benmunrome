@@ -7,11 +7,12 @@ import {
   withComponentInputBinding,
 } from '@angular/router';
 import { appRoutes } from '../../app.routes';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-article',
   standalone: true,
-  imports: [MarkdownComponent, RouterLinkWithHref],
+  imports: [MarkdownComponent, RouterLinkWithHref, CommonModule],
   templateUrl: './article.component.html',
   styleUrl: './article.component.scss',
 })
