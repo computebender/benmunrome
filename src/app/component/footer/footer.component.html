@@ -1,1 +1,30 @@
-<p>footer works!</p>
+<footer class="mt-4 bg-slate-800 bg-opacity-10 p-4 shadow-inner">
+  <div
+    class="flex flex-col items-start md:flex-row md:items-center md:justify-between md:px-8"
+  >
+    <div>
+      <span class="font-light">Made with 🩵 by Ben Munro</span>
+    </div>
+    <div
+      class="flex flex-col space-x-0 space-y-4 md:flex-row md:space-x-4 md:space-y-0"
+    >
+      @for (navbarItem of navbarItems; track $index) {
+        @if (!navbarItem.external) {
+          <a
+            [routerLink]="[navbarItem.link]"
+            class="font-sans font-light text-slate-800 no-underline hover:text-slate-600"
+            routerLinkActive="!underline"
+            >{{ navbarItem.label }}</a
+          >
+        } @else {
+          <a
+            [href]="navbarItem.link"
+            target="_blank"
+            class="font-sans font-light text-slate-800 no-underline hover:text-slate-600"
+            >{{ navbarItem.label }}</a
+          >
+        }
+      }
+    </div>
+  </div>
+</footer>

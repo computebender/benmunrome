@@ -1,11 +1,11 @@
-interface NavbarItem {
+export interface NavbarItem {
   id: number;
   label: string;
   link: string;
   external?: boolean;
 }
 
-export const navbarLinks: NavbarItem[] = [
+export const navbarItems: NavbarItem[] = [
   { id: 1, label: 'Home', link: '/home' },
   { id: 2, label: 'Blog', link: '/blog' },
   { id: 3, label: 'About Me', link: '/about-me' },

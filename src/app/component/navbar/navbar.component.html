@@ -1,20 +1,20 @@
 <ng-template #navLinks>
-  @for (navbarLink of navbarLinks; track navbarLink.id) {
-    @if (!navbarLink.external) {
+  @for (navbarItem of navbarItems; track $index) {
+    @if (!navbarItem.external) {
       <a
-        [routerLink]="[navbarLink.link]"
+        [routerLink]="[navbarItem.link]"
         class="font-sans text-2xl font-light text-slate-800 no-underline underline-offset-8 hover:text-slate-600 hover:underline"
         routerLinkActive="!underline"
         (click)="hideMobileNav()"
-        >{{ navbarLink.label }}</a
+        >{{ navbarItem.label }}</a
       >
     } @else {
       <a
-        [href]="navbarLink.link"
+        [href]="navbarItem.link"
         target="_blank"
         class="font-sans text-2xl font-light text-slate-800 no-underline underline-offset-8 hover:text-slate-600 hover:underline"
         (click)="hideMobileNav()"
-        >{{ navbarLink.label }}</a
+        >{{ navbarItem.label }}</a
       >
     }
   }
