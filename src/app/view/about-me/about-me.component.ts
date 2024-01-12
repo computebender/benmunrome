@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
+import { ImageCardComponent } from '../../component/image-card/image-card.component';
 
 @Component({
   selector: 'app-about-me',
   standalone: true,
-  imports: [],
+  imports: [ImageCardComponent],
   templateUrl: './about-me.component.html',
-  styleUrl: './about-me.component.scss'
+  styleUrl: './about-me.component.scss',
 })
-export class AboutMeComponent {
-
-}
+export class AboutMeComponent {}

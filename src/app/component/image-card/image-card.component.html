@@ -1,0 +1,39 @@
+<figure
+  class="m-0 flex flex-col space-y-2 rounded-lg border border-solid border-slate-300 px-2 py-3"
+>
+  <img
+    [src]="imageUrl"
+    class="h-auto w-full cursor-pointer"
+    [ngClass]="{
+      'cursor-pointer': enableDialog
+    }"
+    [alt]="caption"
+    (click)="handleImageClick()"
+  />
+  @if (caption !== undefined) {
+    <figcaption class="text-base italic">{{ caption }}</figcaption>
+  }
+</figure>
+
+<dialog
+  #largeImageDialog
+  class="rounded-xl border-0 backdrop:bg-gray-500 backdrop:opacity-50"
+  (click)="handleBackdropClick($event)"
+>
+  <div class="flex flex-col">
+    <div class="cursor-pointer self-end" autofocus>
+      <button
+        class="material-symbols-outlined cursor-pointer border-0 bg-transparent"
+        (click)="handleCloseDialog($event)"
+      >
+        close
+      </button>
+    </div>
+
+    <img
+      [src]="largeImageUrl !== undefined ? largeImageUrl : imageUrl"
+      class="max-h-[90vh] max-w-[90vw]"
+      [alt]="caption"
+    />
+  </div>
+</dialog>
