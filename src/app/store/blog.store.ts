@@ -1,6 +1,7 @@
 import {
   patchState,
   signalStore,
+  type,
   withComputed,
   withHooks,
   withMethods,
@@ -12,10 +13,21 @@ import { computed, inject } from '@angular/core';
 import { ArticleService } from '../service/article.service';
 import { catchError, first } from 'rxjs';
 import { withDevtools } from '@angular-architects/ngrx-toolkit';
+import { Tag } from '../model/tag.model';
+import { sortArticlesByDate } from '../util/sort-articles-by-date.util';
+import { filterActiveArticles } from '../util/filter-active-articles.util';
+import { filterArticlesByTagIds } from '../util/filter-article-by-tag-ids.util';
+import { joinArticlesWithTags } from '../util/join-articles-with-tags.util';
+import { filterActiveTags } from '../util/filter-active-tags.util';
+import { filterInactiveTags } from '../util/filter-inactive-tags.util';
+import { addActiveTagIdToActiveTagIds } from '../util/add-active-tag-id-to-active-tag-ids.util';
+import { removeActiveTagIdFromActiveTagIds } from '../util/remove-active-tag-id-from-active-tag-ids.util';
+import { filterArticlesByEveryTagIds } from '../util/filter-article-by-tag-ids-refine.util';
 
 interface BlogStoreState {
   currentArticleId: string | undefined;
   featuredArticleIds: string[];
+  activeTagIds: string[] | null;
 }
 
 export const BlogStore = signalStore(
@@ -24,28 +36,60 @@ export const BlogStore = signalStore(
   withState<BlogStoreState>({
     currentArticleId: undefined,
     featuredArticleIds: [],
+    activeTagIds: null,
   }),
-  withEntities<Article>(),
-  withComputed(({ entities, currentArticleId, featuredArticleIds }) => ({
-    currentArticle: computed(() =>
-      entities().find((article) => article.id === currentArticleId()),
-    ),
-    activeArticlesByDate: computed(() =>
-      entities()
-        .filter((article) => article.isActive)
-        .sort((a, b) => {
-          const aDate = new Date(a.date);
-          const bDate = new Date(b.date);
-          return bDate.getTime() - aDate.getTime();
-        }),
-    ),
-    featuredArticles: computed(() =>
-      entities().filter(
-        (article) =>
-          featuredArticleIds().includes(article.id) && article.isActive,
+  withEntities({ entity: type<Article>(), collection: 'article' }),
+  withEntities({ entity: type<Tag>(), collection: 'tag' }),
+  withComputed(
+    ({
+      articleEntities,
+      currentArticleId,
+      featuredArticleIds,
+      activeTagIds,
+      tagEntities,
+    }) => ({
+      currentArticle: computed(() =>
+        articleEntities().find((article) => article.id === currentArticleId()),
       ),
-    ),
-  })),
+      activeArticlesByDate: computed(() =>
+        joinArticlesWithTags(
+          sortArticlesByDate(filterActiveArticles(articleEntities())),
+          tagEntities(),
+        ),
+      ),
+      featuredArticles: computed(() =>
+        joinArticlesWithTags(
+          articleEntities().filter(
+            (article) =>
+              featuredArticleIds().includes(article.id) && article.isActive,
+          ),
+          tagEntities(),
+        ),
+      ),
+      activeTagFilteredArticlesByDate: computed(() => {
+        const tagIds = activeTagIds();
+        if (tagIds == null) {
+          return joinArticlesWithTags(
+            sortArticlesByDate(filterActiveArticles(articleEntities())),
+            tagEntities(),
+          );
+        }
+        return joinArticlesWithTags(
+          filterArticlesByEveryTagIds(
+            sortArticlesByDate(filterActiveArticles(articleEntities())),
+            tagIds,
+          ),
+          tagEntities(),
+        );
+      }),
+      activeTags: computed(() =>
+        filterActiveTags(tagEntities(), activeTagIds()),
+      ),
+      inactiveTags: computed(() =>
+        filterInactiveTags(tagEntities(), activeTagIds()),
+      ),
+    }),
+  ),
   withMethods((store) => {
     const articleService = inject(ArticleService);
 
@@ -60,10 +104,12 @@ export const BlogStore = signalStore(
               return [];
             }),
           )
-          .subscribe((articles) => patchState(store, addEntities(articles)));
+          .subscribe((articles) =>
+            patchState(store, addEntities(articles, { collection: 'article' })),
+          );
       },
       addArticles: (articles: Article[]) => {
-        patchState(store, addEntities(articles));
+        patchState(store, addEntities(articles, { collection: 'article' }));
       },
       setCurrentArticleId: (articleId: string) => {
         patchState(store, {
@@ -84,11 +130,42 @@ export const BlogStore = signalStore(
             patchState(store, { featuredArticleIds: ids });
           });
       },
+      loadTags: () => {
+        articleService
+          .getTags()
+          .pipe(
+            first(),
+            catchError((error) => {
+              console.log('Error loading tags', error);
+              return [];
+            }),
+          )
+          .subscribe((tags) => {
+            patchState(store, addEntities(tags, { collection: 'tag' }));
+          });
+      },
+      addActiveTagId: (tagId: string) => {
+        patchState(store, {
+          activeTagIds: addActiveTagIdToActiveTagIds(
+            store.activeTagIds(),
+            tagId,
+          ),
+        });
+      },
+      removeActiveTagId: (tagId: string) => {
+        patchState(store, {
+          activeTagIds: removeActiveTagIdFromActiveTagIds(
+            store.activeTagIds(),
+            tagId,
+          ),
+        });
+      },
     };
   }),
   withHooks({
-    onInit: ({ loadArticles, loadFeatuedArticleIds }) => {
+    onInit: ({ loadArticles, loadTags }) => {
       loadArticles();
+      loadTags();
     },
   }),
 );

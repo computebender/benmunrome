@@ -16,7 +16,13 @@
   </div>
 
   <div class="grow px-4">
-    <h2 class="mb-2 truncate text-lg font-bold">{{ article.title }}</h2>
-    <p class="line-clamp-3 text-gray-600">{{ article.summary }}</p>
+    <h2 class="mb-2 text-lg font-bold">{{ article.title }}</h2>
+    <p class="text-gray-600">{{ article.summary }}</p>
+  </div>
+
+  <div class="mb-2 mt-3 flex flex-wrap gap-x-1 gap-y-2 px-4">
+    @for (tag of article.tags; track $index) {
+      <app-tag-pill [tag]="tag" />
+    }
   </div>
 </div>
