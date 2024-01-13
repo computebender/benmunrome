@@ -1,1 +1,28 @@
-<app-article-card-grid [articles]="blogStore.activeArticlesByDate()" />
+<div class="w-full space-y-3">
+  <div class="flex flex-wrap gap-2">
+    @for (tag of blogStore.activeTags(); track $index) {
+      <app-tag-pill
+        [tag]="tag"
+        [interactable]="true"
+        [closable]="true"
+        [variant]="PILL_VARIANT.LARGE"
+        (interact)="handleTagSetInactive($event)"
+      />
+    }
+  </div>
+  <div class="flex flex-wrap gap-2">
+    @for (tag of blogStore.inactiveTags(); track $index) {
+      <app-tag-pill
+        [tag]="tag"
+        [interactable]="true"
+        [variant]="PILL_VARIANT.LARGE"
+        (interact)="handleTagSetActive($event)"
+      />
+    }
+  </div>
+</div>
+<hr class="mx-2 my-4 h-px border-0 bg-slate-200" />
+
+<app-article-card-grid
+  [articles]="blogStore.activeTagFilteredArticlesByDate()"
+/>

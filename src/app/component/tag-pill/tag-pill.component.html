@@ -1,0 +1,17 @@
+<span
+  class="rounded-full px-3.5 py-1 align-middle font-semibold"
+  [ngClass]="[
+    backgroundColour,
+    textColour,
+    interactable ? 'cursor-pointer' : '',
+    variant === 'small' ? 'text-xs' : 'text-sm'
+  ]"
+  (click)="handleClick()"
+>
+  @if (closable) {
+    <span class="material-symbols-outlined align-middle text-base">
+      close
+    </span>
+  }
+  <span class="align-middle">{{ _tag.name }}</span>
+</span>
