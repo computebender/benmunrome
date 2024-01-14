@@ -3,14 +3,12 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
 COPY ./ ./
-RUN npm run build benmunrome --configuration=production 
+RUN npx nx run benmunrome:build --configuration=production
 
 FROM node:20-alpine
 
 WORKDIR /app
-COPY --from=build /app/package.json ./
-COPY --from=build /app/angular.json ./
 
 COPY --from=build /app/dist/ ./dist/
 
-CMD ["npm", "run", "serve:ssr:benmunrome"]
+CMD ["node", "dist/apps/benmunrome/server/server.mjs"]
