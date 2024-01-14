@@ -19,7 +19,9 @@
     "module": "ES2022",
     "useDefineForClassFields": false,
     "lib": ["ES2022", "dom"],
-    "paths": {},
+    "paths": {
+      "@benmunrome/admin-dashboard": ["libs/admin-dashboard/src/index.ts"]
+    },
     "baseUrl": ".",
     "rootDir": "."
   },
