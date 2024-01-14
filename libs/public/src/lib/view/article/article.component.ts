@@ -1,13 +1,8 @@
 import { Component, Input, inject } from '@angular/core';
 import { MarkdownComponent } from 'ngx-markdown';
 import { BlogStore } from '../../store/blog.store';
-import {
-  RouterLinkWithHref,
-  provideRouter,
-  withComponentInputBinding,
-} from '@angular/router';
-import { appRoutes } from '../../app.routes';
 import { CommonModule } from '@angular/common';
+import { RouterLinkWithHref } from '@angular/router';
 
 @Component({
   selector: 'app-article',
