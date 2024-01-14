@@ -45,6 +45,13 @@ export const appRoutes: Routes = [
       ),
   },
   {
+    path: 'admin',
+    loadChildren: () =>
+      import('@benmunrome/admin-dashboard').then(
+        (mod) => mod.AdminDashboardModule,
+      ),
+  },
+  {
     path: '**',
     redirectTo: '404',
   },
