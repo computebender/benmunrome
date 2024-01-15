@@ -6,7 +6,6 @@ import {
   provideRouter,
   withComponentInputBinding,
 } from '@angular/router';
-import { appRoutes } from '../../app.routes';
 import { CommonModule } from '@angular/common';
 
 @Component({
