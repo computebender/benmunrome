@@ -13,18 +13,11 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
 import { MARKED_OPTIONS, provideMarkdown } from 'ngx-markdown';
 import { markedOptionsFactory } from './markdown.config';
-
-const routes: Routes = [
-  {
-    path: '',
-    loadChildren: () =>
-      import('./public/public.module').then((m) => m.PublicModule),
-  },
-];
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, RouterModule.forRoot(routes)],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [
     provideClientHydration(),
     importProvidersFrom(
