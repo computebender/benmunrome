@@ -1,23 +1,34 @@
-import { NgModule, importProvidersFrom } from '@angular/core';
+import { NgModule, importProvidersFrom, isDevMode } from '@angular/core';
 import {
   BrowserModule,
   provideClientHydration,
 } from '@angular/platform-browser';
-import { RouterModule, Routes } from '@angular/router';
 
-import { AppComponent } from './app.component';
+import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
-import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 import { MARKED_OPTIONS, provideMarkdown } from 'ngx-markdown';
-import { markedOptionsFactory } from './markdown.config';
 import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { AuthModule } from './auth/auth.module';
+import { markedOptionsFactory } from './markdown.config';
+import { LoginComponent } from './view/login/login.component';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule],
+  declarations: [AppComponent, LoginComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot([]),
+    AuthModule,
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+  ],
   providers: [
     provideClientHydration(),
     importProvidersFrom(
