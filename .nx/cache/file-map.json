@@ -1,0 +1,573 @@
+{
+  "version": "6.0",
+  "nxVersion": "17.2.8",
+  "deps": {
+    "@angular-architects/ngrx-toolkit": "^0.0.3",
+    "@angular/animations": "^17.0.0",
+    "@angular/cdk": "^17.0.4",
+    "@angular/common": "^17.0.0",
+    "@angular/compiler": "^17.0.0",
+    "@angular/core": "^17.0.0",
+    "@angular/fire": "^17.0.1",
+    "@angular/forms": "^17.0.0",
+    "@angular/platform-browser": "^17.0.0",
+    "@angular/platform-browser-dynamic": "^17.0.0",
+    "@angular/platform-server": "^17.0.0",
+    "@angular/router": "^17.0.0",
+    "@angular/ssr": "^17.0.8",
+    "@fortawesome/angular-fontawesome": "^0.14.1",
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "@fortawesome/free-brands-svg-icons": "^6.4.2",
+    "@fortawesome/free-regular-svg-icons": "^6.4.2",
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "@ngrx/signals": "^17.0.1",
+    "express": "^4.18.2",
+    "marked": "^9.1.6",
+    "ngx-markdown": "^17.1.1",
+    "prismjs": "^1.29.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.14.2",
+    "@angular-devkit/build-angular": "^17.0.8",
+    "@angular/cli": "^17.0.8",
+    "@angular/compiler-cli": "^17.0.0",
+    "@types/express": "^4.17.17",
+    "@types/jasmine": "~5.1.0",
+    "@types/node": "^18.18.0",
+    "autoprefixer": "^10.4.16",
+    "jasmine-core": "~5.1.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "postcss": "^8.4.32",
+    "prettier": "^3.1.1",
+    "prettier-plugin-tailwindcss": "^0.5.9",
+    "tailwindcss": "^3.4.0",
+    "typescript": "~5.2.2"
+  },
+  "pathMappings": {},
+  "nxJsonPlugins": [],
+  "fileMap": {
+    "projectFileMap": {
+      "benmunrome": [
+        {
+          "file": ".editorconfig",
+          "hash": "6686520031028425313"
+        },
+        {
+          "file": ".github/workflows/deploy.yml",
+          "hash": "2821297248047824221"
+        },
+        {
+          "file": ".gitignore",
+          "hash": "14831711255100259582"
+        },
+        {
+          "file": ".prettierrc",
+          "hash": "2018107465255455114"
+        },
+        {
+          "file": ".vscode/extensions.json",
+          "hash": "5331566439708925252"
+        },
+        {
+          "file": ".vscode/launch.json",
+          "hash": "17038929134016848735"
+        },
+        {
+          "file": ".vscode/tasks.json",
+          "hash": "5336636969995539451"
+        },
+        {
+          "file": "Caddyfile",
+          "hash": "11426810758872589191"
+        },
+        {
+          "file": "Dockerfile",
+          "hash": "999011823844993694"
+        },
+        {
+          "file": "README.md",
+          "hash": "7685584132597829541"
+        },
+        {
+          "file": "angular.json",
+          "hash": "15264520482271097007"
+        },
+        {
+          "file": "api/index.mjs",
+          "hash": "3402633075738212734"
+        },
+        {
+          "file": "docker-compose.yml",
+          "hash": "1742482616377863602"
+        },
+        {
+          "file": "firebase.json",
+          "hash": "1389868326933519382"
+        },
+        {
+          "file": "package-lock.json",
+          "hash": "11490414811008030989"
+        },
+        {
+          "file": "package.json",
+          "hash": "16892964923304442412",
+          "deps": [
+            "npm:@angular-architects/ngrx-toolkit",
+            "npm:@angular/animations",
+            "npm:@angular/cdk",
+            "npm:@angular/common",
+            "npm:@angular/compiler",
+            "npm:@angular/core",
+            "npm:@angular/fire",
+            "npm:@angular/forms",
+            "npm:@angular/platform-browser",
+            "npm:@angular/platform-browser-dynamic",
+            "npm:@angular/platform-server",
+            "npm:@angular/router",
+            "npm:@angular/ssr",
+            "npm:@fortawesome/angular-fontawesome",
+            "npm:@fortawesome/fontawesome-svg-core",
+            "npm:@fortawesome/free-brands-svg-icons",
+            "npm:@fortawesome/free-regular-svg-icons",
+            "npm:@fortawesome/free-solid-svg-icons",
+            "npm:@ngrx/signals",
+            "npm:express",
+            "npm:marked",
+            "npm:ngx-markdown",
+            "npm:prismjs",
+            "npm:rxjs",
+            "npm:tslib",
+            "npm:zone.js",
+            "npm:@angular-devkit/build-angular",
+            "npm:@angular/cli",
+            "npm:@angular/compiler-cli",
+            "npm:@types/express",
+            "npm:@types/jasmine",
+            "npm:@types/node",
+            "npm:autoprefixer",
+            "npm:jasmine-core",
+            "npm:karma",
+            "npm:karma-chrome-launcher",
+            "npm:karma-coverage",
+            "npm:karma-jasmine",
+            "npm:karma-jasmine-html-reporter",
+            "npm:postcss",
+            "npm:prettier",
+            "npm:prettier-plugin-tailwindcss",
+            "npm:tailwindcss",
+            "npm:typescript"
+          ]
+        },
+        {
+          "file": "server.ts",
+          "hash": "7713808127824314998"
+        },
+        {
+          "file": "src/app/app.component.html",
+          "hash": "12907845455749328117"
+        },
+        {
+          "file": "src/app/app.component.scss",
+          "hash": "17051708702580183809"
+        },
+        {
+          "file": "src/app/app.component.spec.ts",
+          "hash": "8268669283846066429"
+        },
+        {
+          "file": "src/app/app.component.ts",
+          "hash": "3577626588901730541"
+        },
+        {
+          "file": "src/app/app.config.server.ts",
+          "hash": "5483273610509333636"
+        },
+        {
+          "file": "src/app/app.routes.ts",
+          "hash": "227250342335224182"
+        },
+        {
+          "file": "src/app/component/article-card-grid/article-card-grid.component.html",
+          "hash": "3801675247491909603"
+        },
+        {
+          "file": "src/app/component/article-card-grid/article-card-grid.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/component/article-card-grid/article-card-grid.component.spec.ts",
+          "hash": "13104666911509027227"
+        },
+        {
+          "file": "src/app/component/article-card-grid/article-card-grid.component.ts",
+          "hash": "17734696000695629187"
+        },
+        {
+          "file": "src/app/component/article-card/article-card.component.html",
+          "hash": "14898489662253624965"
+        },
+        {
+          "file": "src/app/component/article-card/article-card.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/component/article-card/article-card.component.spec.ts",
+          "hash": "11146402905332799817"
+        },
+        {
+          "file": "src/app/component/article-card/article-card.component.ts",
+          "hash": "17937071063500463019"
+        },
+        {
+          "file": "src/app/component/footer/footer.component.html",
+          "hash": "13247778985255127183"
+        },
+        {
+          "file": "src/app/component/footer/footer.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/component/footer/footer.component.spec.ts",
+          "hash": "10910183056555637205"
+        },
+        {
+          "file": "src/app/component/footer/footer.component.ts",
+          "hash": "9623264138079379550"
+        },
+        {
+          "file": "src/app/component/image-card/image-card.component.html",
+          "hash": "11712919411300753908"
+        },
+        {
+          "file": "src/app/component/image-card/image-card.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/component/image-card/image-card.component.spec.ts",
+          "hash": "15829994305821079423"
+        },
+        {
+          "file": "src/app/component/image-card/image-card.component.ts",
+          "hash": "7047273987888859402"
+        },
+        {
+          "file": "src/app/component/navbar/navbar.component.html",
+          "hash": "9720184125505852931"
+        },
+        {
+          "file": "src/app/component/navbar/navbar.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/component/navbar/navbar.component.spec.ts",
+          "hash": "8582032208992178047"
+        },
+        {
+          "file": "src/app/component/navbar/navbar.component.ts",
+          "hash": "16530030180556387614"
+        },
+        {
+          "file": "src/app/component/tag-pill/tag-pill.component.html",
+          "hash": "13293611234024825203"
+        },
+        {
+          "file": "src/app/component/tag-pill/tag-pill.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/component/tag-pill/tag-pill.component.spec.ts",
+          "hash": "13220487782945714209"
+        },
+        {
+          "file": "src/app/component/tag-pill/tag-pill.component.ts",
+          "hash": "12521595000448615900"
+        },
+        {
+          "file": "src/app/component/welcome-banner/welcome-banner.component.html",
+          "hash": "9743647804644985178"
+        },
+        {
+          "file": "src/app/component/welcome-banner/welcome-banner.component.scss",
+          "hash": "15895219557100229543"
+        },
+        {
+          "file": "src/app/component/welcome-banner/welcome-banner.component.spec.ts",
+          "hash": "14448902682184577143"
+        },
+        {
+          "file": "src/app/component/welcome-banner/welcome-banner.component.ts",
+          "hash": "1121342452648422325"
+        },
+        {
+          "file": "src/app/config/app.config.ts",
+          "hash": "17360105460131122627"
+        },
+        {
+          "file": "src/app/config/markdown.config.ts",
+          "hash": "9388119588436551056"
+        },
+        {
+          "file": "src/app/config/navbar-items.ts",
+          "hash": "1616685305768134684"
+        },
+        {
+          "file": "src/app/directive/parallax/parallax.directive.spec.ts",
+          "hash": "423625615846545420"
+        },
+        {
+          "file": "src/app/directive/parallax/parallax.directive.ts",
+          "hash": "9120697407487260663"
+        },
+        {
+          "file": "src/app/directive/parallax/parallax.service.ts",
+          "hash": "5796135960413066933"
+        },
+        {
+          "file": "src/app/model/article.model.ts",
+          "hash": "15907809052105487058"
+        },
+        {
+          "file": "src/app/model/featuredArticles.model.ts",
+          "hash": "9333139241920667625"
+        },
+        {
+          "file": "src/app/model/tag.model.ts",
+          "hash": "7102276075871763121"
+        },
+        {
+          "file": "src/app/service/article.service.spec.ts",
+          "hash": "8027274825651940411"
+        },
+        {
+          "file": "src/app/service/article.service.ts",
+          "hash": "13479972600036111359"
+        },
+        {
+          "file": "src/app/store/blog.store.ts",
+          "hash": "1436917419212638785"
+        },
+        {
+          "file": "src/app/util/add-active-tag-id-to-active-tag-ids.util.ts",
+          "hash": "17592206969110032487"
+        },
+        {
+          "file": "src/app/util/filter-active-articles.util.ts",
+          "hash": "13357864836402765924"
+        },
+        {
+          "file": "src/app/util/filter-active-tags.util.ts",
+          "hash": "10240743279971517516"
+        },
+        {
+          "file": "src/app/util/filter-article-by-tag-ids-refine.util.ts",
+          "hash": "11675564119337585306"
+        },
+        {
+          "file": "src/app/util/filter-article-by-tag-ids.util.ts",
+          "hash": "211039640099344961"
+        },
+        {
+          "file": "src/app/util/filter-inactive-tags.util.ts",
+          "hash": "17628861503456118790"
+        },
+        {
+          "file": "src/app/util/join-articles-with-tags.util.ts",
+          "hash": "11482151545827793362"
+        },
+        {
+          "file": "src/app/util/remove-active-tag-id-from-active-tag-ids.util.ts",
+          "hash": "3631892525562960045"
+        },
+        {
+          "file": "src/app/util/sort-articles-by-date.util.ts",
+          "hash": "10020139932285857907"
+        },
+        {
+          "file": "src/app/util/tag-colour-to-tailwind-class.util.ts",
+          "hash": "11390543679655293066"
+        },
+        {
+          "file": "src/app/view/about-me/about-me.component.html",
+          "hash": "13220010682671299441"
+        },
+        {
+          "file": "src/app/view/about-me/about-me.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/view/about-me/about-me.component.spec.ts",
+          "hash": "7956992124214180111"
+        },
+        {
+          "file": "src/app/view/about-me/about-me.component.ts",
+          "hash": "11232215979047222394"
+        },
+        {
+          "file": "src/app/view/article/article.component.html",
+          "hash": "4233527055929585238"
+        },
+        {
+          "file": "src/app/view/article/article.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/view/article/article.component.spec.ts",
+          "hash": "15614535072775545844"
+        },
+        {
+          "file": "src/app/view/article/article.component.ts",
+          "hash": "15233394055435296621"
+        },
+        {
+          "file": "src/app/view/blog/blog.component.html",
+          "hash": "5010651638175923858"
+        },
+        {
+          "file": "src/app/view/blog/blog.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/view/blog/blog.component.spec.ts",
+          "hash": "7741210589762185757"
+        },
+        {
+          "file": "src/app/view/blog/blog.component.ts",
+          "hash": "18336232376145253437"
+        },
+        {
+          "file": "src/app/view/home/home.component.html",
+          "hash": "12505813462513271366"
+        },
+        {
+          "file": "src/app/view/home/home.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/view/home/home.component.spec.ts",
+          "hash": "5533293743300657749"
+        },
+        {
+          "file": "src/app/view/home/home.component.ts",
+          "hash": "613197747119136801"
+        },
+        {
+          "file": "src/app/view/page-not-found/page-not-found.component.html",
+          "hash": "9015626821334097068"
+        },
+        {
+          "file": "src/app/view/page-not-found/page-not-found.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/view/page-not-found/page-not-found.component.spec.ts",
+          "hash": "13615741318569243696"
+        },
+        {
+          "file": "src/app/view/page-not-found/page-not-found.component.ts",
+          "hash": "13330837127175707841"
+        },
+        {
+          "file": "src/app/view/portfolio/portfolio.component.html",
+          "hash": "4412095517597787084"
+        },
+        {
+          "file": "src/app/view/portfolio/portfolio.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/view/portfolio/portfolio.component.spec.ts",
+          "hash": "13068842048129770985"
+        },
+        {
+          "file": "src/app/view/portfolio/portfolio.component.ts",
+          "hash": "7974247677161117958"
+        },
+        {
+          "file": "src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/assets/image/about_me/grafana_dashboard.png",
+          "hash": "854775557364029373"
+        },
+        {
+          "file": "src/assets/image/about_me/halloween.jpg",
+          "hash": "4849446787142409710"
+        },
+        {
+          "file": "src/assets/image/about_me/hut.png",
+          "hash": "5039316860870904433"
+        },
+        {
+          "file": "src/assets/image/about_me/soup.jpg",
+          "hash": "11579734367096108223"
+        },
+        {
+          "file": "src/assets/image/b_logo.png",
+          "hash": "14684220788686403897"
+        },
+        {
+          "file": "src/assets/image/portfolio/benmunrome.png",
+          "hash": "1489036342399490661"
+        },
+        {
+          "file": "src/assets/image/welcome_banner/character.png",
+          "hash": "2911961074040250051"
+        },
+        {
+          "file": "src/assets/image/welcome_banner/city_silhouette.png",
+          "hash": "10068504499996208033"
+        },
+        {
+          "file": "src/assets/image/welcome_banner/office_background.png",
+          "hash": "166787256579678546"
+        },
+        {
+          "file": "src/favicon.ico",
+          "hash": "3988961587069885523"
+        },
+        {
+          "file": "src/index.html",
+          "hash": "6028585433616601402"
+        },
+        {
+          "file": "src/main.server.ts",
+          "hash": "11653607448136507287"
+        },
+        {
+          "file": "src/main.ts",
+          "hash": "17809825855151530081"
+        },
+        {
+          "file": "src/styles.scss",
+          "hash": "572860960006952521"
+        },
+        {
+          "file": "tailwind.config.js",
+          "hash": "17344769968363771076"
+        },
+        {
+          "file": "tsconfig.app.json",
+          "hash": "17948364081101022842"
+        },
+        {
+          "file": "tsconfig.json",
+          "hash": "6830907402848794383"
+        },
+        {
+          "file": "tsconfig.spec.json",
+          "hash": "15575553540147145788"
+        },
+        {
+          "file": "vercel.json",
+          "hash": "17679464633162030798"
+        }
+      ]
+    },
+    "nonProjectFiles": []
+  }
+}
