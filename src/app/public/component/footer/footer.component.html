@@ -3,7 +3,12 @@
     class="flex flex-col items-start md:flex-row md:items-center md:justify-between md:px-8"
   >
     <div>
-      <span class="font-light">Made with 🩵 by Ben Munro</span>
+      <span class="font-light"
+        >Made with 🩵 by
+        <a [routerLink]="['/admin']" class="text-slate-800 no-underline"
+          >Ben Munro</a
+        ></span
+      >
     </div>
     <div
       class="flex flex-col space-x-0 space-y-4 md:flex-row md:space-x-4 md:space-y-0"
