@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, map, mergeMap, tap } from 'rxjs/operators';
+import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -17,7 +17,7 @@ export class AuthEffects {
       ofType(AuthActions.signInWithGoogle),
       mergeMap(() =>
         this.authService.signInWithGoogle().pipe(
-          map((user) => AuthActions.signInSuccess({ user })),
+          map((uid) => AuthActions.signInSuccess({ uid })),
           catchError((error) => {
             const googleAuthError: AuthError = {
               code: error.code || '',
@@ -48,10 +48,28 @@ export class AuthEffects {
     ),
   );
 
-  signInWithGoogleSuccess$ = createEffect(
+  signInWithGoogleSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.signInSuccess),
+      switchMap(({ uid }) =>
+        this.authService.getUser(uid).pipe(
+          map((user) => AuthActions.getUserSuccess({ user })),
+          catchError((error) => {
+            const getUserError: AuthError = {
+              code: error.code || '',
+              message: error.message || '',
+            };
+            return of(AuthActions.getUserError({ error: getUserError }));
+          }),
+        ),
+      ),
+    ),
+  );
+
+  getUserSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(AuthActions.signInSuccess),
+        ofType(AuthActions.getUserSuccess),
         concatLatestFrom(() => this.store.select(selectRedirectUrl)),
         tap(([, url]) => this.router.navigateByUrl(url)),
       ),
