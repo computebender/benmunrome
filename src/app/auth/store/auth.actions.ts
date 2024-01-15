@@ -9,9 +9,12 @@ export const AuthActions = createActionGroup({
     'Set Redirect Url': props<{ url: string }>(),
     'Sign In With Google': emptyProps(),
     'Sign In Error': props<{ error: AuthError }>(),
-    'Sign In Success': props<{ user: AuthUser }>(),
+    'Sign In Success': props<{ uid: string }>(),
     'Sign Out': emptyProps(),
     'Sign Out Error': props<{ error: AuthError }>(),
     'Sign Out Success': emptyProps(),
+    'Get User': props<{ userId: string }>(),
+    'Get User Error': props<{ error: AuthError }>(),
+    'Get User Success': props<{ user: AuthUser }>(),
   },
 });

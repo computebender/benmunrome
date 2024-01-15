@@ -1,4 +1,6 @@
 export interface AuthUser {
-  displayName: string;
   email: string;
+  claims: {
+    admin: boolean;
+  };
 }

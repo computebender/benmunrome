@@ -31,12 +31,6 @@ const authReducer = createReducer(
     error,
     isLoading: false,
   })),
-  on(AuthActions.signInSuccess, (state, { user }) => ({
-    ...state,
-    user,
-    error: null,
-    isLoading: false,
-  })),
   on(AuthActions.signOut, (state) => ({
     ...state,
     isLoading: true,
@@ -60,6 +54,21 @@ const authReducer = createReducer(
     ...state,
     redirectUrl: url,
   })),
+  on(AuthActions.getUser, (state) => ({
+    ...state,
+    isLoading: true,
+  })),
+  on(AuthActions.getUserError, (state, { error }) => ({
+    ...state,
+    error,
+    isLoading: false,
+  })),
+  on(AuthActions.getUserSuccess, (state, { user }) => ({
+    ...state,
+    user,
+    error: null,
+    isLoading: false,
+  })),
 );
 
 export const authFeature = createFeature({
@@ -67,6 +76,10 @@ export const authFeature = createFeature({
   reducer: authReducer,
   extraSelectors: ({ selectUser }) => ({
     selectIsAuthenticated: createSelector(selectUser, (user) => user !== null),
+    selectIsAdmin: createSelector(
+      selectUser,
+      (user) => user?.claims.admin === true,
+    ),
   }),
 });
 
@@ -79,4 +92,5 @@ export const {
   selectIsAuthenticated,
   selectUnauthenticatedUrl,
   selectRedirectUrl,
+  selectIsAdmin,
 } = authFeature;
