@@ -1,4 +1,5 @@
 import functions = require('firebase-functions');
+import { getAuth } from 'firebase-admin/auth';
 import { getFirestore, Timestamp } from 'firebase-admin/firestore';
 
 exports.processSignUp = functions.auth.user().onCreate(async (user) => {
@@ -12,6 +13,12 @@ exports.processSignUp = functions.auth.user().onCreate(async (user) => {
     user.emailVerified
   ) {
     claims.admin = true;
+  }
+
+  try {
+    await getAuth().setCustomUserClaims(user.uid, claims);
+  } catch (error) {
+    console.log(error);
   }
 
   try {
