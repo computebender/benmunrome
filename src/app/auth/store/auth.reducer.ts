@@ -7,7 +7,9 @@ export const authFeatureKey = 'auth';
 export interface State {
   user: AuthUser | null;
   error: unknown | null;
-  isLoading: boolean;
+  loadingSignIn: boolean;
+  loadingSignOut: boolean;
+  loadingUser: boolean;
   unauthenticatedUrl: string;
   redirectUrl: string;
 }
@@ -15,7 +17,9 @@ export interface State {
 export const initialState: State = {
   user: null,
   error: null,
-  isLoading: false,
+  loadingSignIn: false,
+  loadingSignOut: false,
+  loadingUser: false,
   unauthenticatedUrl: '/',
   redirectUrl: '/',
 };
@@ -24,27 +28,32 @@ const authReducer = createReducer(
   initialState,
   on(AuthActions.signInWithGoogle, (state) => ({
     ...state,
-    isLoading: true,
+    loadingSignIn: true,
+  })),
+  on(AuthActions.signInSuccess, (state, { uid }) => ({
+    ...state,
+    error: null,
+    loadingSignIn: false,
   })),
   on(AuthActions.signInError, (state, { error }) => ({
     ...state,
     error,
-    isLoading: false,
+    loadingSignIn: false,
   })),
   on(AuthActions.signOut, (state) => ({
     ...state,
-    isLoading: true,
+    loadingSignOut: true,
   })),
   on(AuthActions.signOutError, (state, { error }) => ({
     ...state,
     error,
-    isLoading: false,
+    loadingSignOut: false,
   })),
   on(AuthActions.signOutSuccess, (state) => ({
     ...state,
     user: null,
     error: null,
-    isLoading: false,
+    loadingSignOut: false,
   })),
   on(AuthActions.setUnauthenticatedUrl, (state, { url }) => ({
     ...state,
@@ -56,18 +65,18 @@ const authReducer = createReducer(
   })),
   on(AuthActions.getUser, (state) => ({
     ...state,
-    isLoading: true,
+    loadingUser: true,
   })),
   on(AuthActions.getUserError, (state, { error }) => ({
     ...state,
     error,
-    isLoading: false,
+    loadingUser: false,
   })),
   on(AuthActions.getUserSuccess, (state, { user }) => ({
     ...state,
     user,
     error: null,
-    isLoading: false,
+    loadingUser: false,
   })),
 );
 

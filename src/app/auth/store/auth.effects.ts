@@ -48,9 +48,21 @@ export class AuthEffects {
     ),
   );
 
-  signInWithGoogleSuccess$ = createEffect(() =>
+  authState$ = createEffect(() =>
+    this.authService.authState().pipe(
+      map((user) => {
+        if (user) {
+          return AuthActions.userAuthenticated({ uid: user.uid });
+        } else {
+          return AuthActions.userUnauthenticated();
+        }
+      }),
+    ),
+  );
+
+  userAuthenticatedGetUser$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(AuthActions.signInSuccess),
+      ofType(AuthActions.userAuthenticated),
       switchMap(({ uid }) =>
         this.authService.getUser(uid).pipe(
           map((user) => AuthActions.getUserSuccess({ user })),
