@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Auth, GoogleAuthProvider, signInWithPopup } from '@angular/fire/auth';
+import {
+  Auth,
+  GoogleAuthProvider,
+  authState,
+  signInWithPopup,
+} from '@angular/fire/auth';
 import { Firestore, doc, docData } from '@angular/fire/firestore';
 import { Observable, from, map } from 'rxjs';
 import { AuthUser } from '../model/auth-user.model';
@@ -31,5 +36,9 @@ export class AuthService {
 
   signOut() {
     return from(this.auth.signOut());
+  }
+
+  authState() {
+    return authState(this.auth);
   }
 }
