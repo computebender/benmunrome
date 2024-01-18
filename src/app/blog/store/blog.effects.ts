@@ -1,61 +1,42 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, of, switchMap } from 'rxjs';
-import { v4 as uuidv4 } from 'uuid';
-import { Article } from '../model/article.model';
+import { catchError, map, mergeMap, of } from 'rxjs';
 import { BlogService } from '../service/blog.service';
+import {
+  manyArticleDtoToEntities,
+  oneArticleDtoToEntities,
+} from '../util/article-dto-to-entities.util';
 import { BlogActions } from './blog.actions';
 
 @Injectable()
 export class BlogEffects {
-  newArticle$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(BlogActions.newArticle),
-      switchMap(({ title, slug, summary }) => {
-        const newArticle: Article = {
-          id: uuidv4(),
-          title,
-          slug,
-          summary,
-          isActive: false,
-          coverImageAssetId: null,
-          tagIds: [],
-          assetIds: [],
-          revisionIds: [],
-        };
-
-        return of(BlogActions.createArticle({ article: newArticle }));
-      }),
-    );
-  });
-
   createArticle$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(BlogActions.createArticle),
-      switchMap(({ article }) => {
+      mergeMap(({ article }) => {
         return this.blogService
           .createArticle({
             title: article.title,
             summary: article.summary,
             slug: article.slug,
             isActive: article.isActive,
-            coverImageAssetId: article.coverImageAssetId,
+            coverImageAsset: null,
+            activeRevision: null,
             tags: [],
-            assets: [],
-            revisions: [],
           })
           .pipe(
-            map((articleDocumentReference) => {
-              const firestoreId = articleDocumentReference.id;
+            map((articleDto) => {
+              const { article: createdArticle } =
+                oneArticleDtoToEntities(articleDto);
               return BlogActions.createArticleSuccess({
-                id: article.id,
-                firestoreId,
+                optimisticId: article.id,
+                article: createdArticle,
               });
             }),
             catchError((error) => {
               return of(
                 BlogActions.createArticleFailure({
-                  id: article.id,
+                  optimisticId: article.id,
                   error: error?.message || 'Unknown error',
                 }),
               );
@@ -64,6 +45,36 @@ export class BlogEffects {
       }),
     );
   });
+
+  loadArticles$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(BlogActions.loadArticles),
+      mergeMap(() => {
+        return this.blogService.getArticles().pipe(
+          map((articleDtos) => {
+            console.log(articleDtos);
+            const { articles, tags, assets, revisions } =
+              manyArticleDtoToEntities(articleDtos);
+            return BlogActions.loadArticlesSuccess({
+              articles,
+              tags,
+              assets,
+              revisions,
+            });
+          }),
+          catchError((error) => {
+            console.log(error);
+            return of(
+              BlogActions.loadArticlesFailure({
+                error: error?.message || 'Unknown error',
+              }),
+            );
+          }),
+        );
+      }),
+    );
+  });
+
   constructor(
     private actions$: Actions,
     private blogService: BlogService,

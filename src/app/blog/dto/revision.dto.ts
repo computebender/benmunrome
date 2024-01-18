@@ -1,8 +1,8 @@
 import { Timestamp } from '@angular/fire/firestore';
 
 export interface RevisionDTO {
-  revisionId: string;
-  publishDate: Timestamp;
+  uid?: string;
+  createdAt: Timestamp;
   markdownPath: string;
   note: string;
 }

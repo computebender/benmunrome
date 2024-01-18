@@ -6,8 +6,9 @@ export interface Article {
   slug: string;
   isActive: boolean;
   coverImageAssetId: string | null;
+  activeRevisionId: string | null;
   tagIds: string[];
-  assetIds: string[];
-  revisionIds: string[];
+  assetIds: string[] | null;
+  revisionIds: string[] | null;
   error?: string;
 }

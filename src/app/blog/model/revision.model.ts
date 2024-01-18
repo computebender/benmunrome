@@ -1,6 +1,8 @@
 export interface Revision {
   id: string;
-  publishDate: Date;
+  createdAt: Date;
   markdownPath: string;
   note: string;
+  articleId: string;
+  firestoreId?: string;
 }

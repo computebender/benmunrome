@@ -1,8 +1,8 @@
 import { Timestamp } from '@angular/fire/firestore';
 
 export interface AssetDTO {
-  assetId: string;
-  title: string;
+  uid?: string;
+  name: string;
   path: string;
   createdAt: Timestamp;
 }

@@ -8,8 +8,7 @@ export interface ArticleDTO {
   summary: string;
   slug: string;
   isActive: boolean;
-  coverImageAssetId: string | null;
-  tags: TagDTO[];
-  assets: AssetDTO[];
-  revisions: RevisionDTO[];
+  coverImageAsset: Required<AssetDTO> | null;
+  activeRevision: Required<RevisionDTO> | null;
+  tags: Required<TagDTO>[];
 }

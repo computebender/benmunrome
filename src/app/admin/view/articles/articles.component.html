@@ -1,2 +1,11 @@
 <p>articles works!</p>
+<button (click)="loadArticles()">Load Articles</button>
 <button (click)="handleNewArticle()">New Article</button>
+
+@for (article of articles$ | async; track $index) {
+  <div class="border border-solid border-black">
+    <p>Title: {{ article.title }}</p>
+    <p>ID: {{ article.id }}</p>
+    <p>FirestoreID: {{ article.firestoreId }}</p>
+  </div>
+}
