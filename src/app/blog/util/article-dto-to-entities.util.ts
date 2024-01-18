@@ -4,6 +4,7 @@ import { RevisionDTO } from '../dto/revision.dto';
 import { TagDTO } from '../dto/tag.dto';
 import { Article } from '../model/article.model';
 import { Asset } from '../model/asset.model';
+import { DtoRead } from '../model/dto-read.model';
 import { Revision } from '../model/revision.model';
 import { Tag } from '../model/tag.model';
 
@@ -44,7 +45,7 @@ const tagDtoToTagEntity = (articleTagDto: Required<TagDTO>): Tag => {
 };
 
 export const oneArticleDtoToEntities = (
-  articleDto: ArticleDTO,
+  articleDto: ArticleDTO & DtoRead,
 ): {
   article: Article;
   tags: Tag[];
@@ -74,6 +75,7 @@ export const oneArticleDtoToEntities = (
     isActive: articleDto.isActive,
     coverImageAssetId: articleDto.coverImageAsset?.uid || null,
     activeRevisionId: articleDto.activeRevision?.uid || null,
+    hasPendingWrites: articleDto.hasPendingWrites,
     tagIds: tags.map((tag) => tag.id),
     assetIds,
     revisionIds,
@@ -88,7 +90,7 @@ export const oneArticleDtoToEntities = (
 };
 
 export const manyArticleDtoToEntities = (
-  articleDtos: ArticleDTO[],
+  articleDtos: (ArticleDTO & DtoRead)[],
 ): {
   articles: Article[];
   tags: Tag[];

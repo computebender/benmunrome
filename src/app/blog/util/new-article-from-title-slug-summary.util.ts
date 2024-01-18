@@ -13,6 +13,7 @@ export const newArticleFromTitleSlugSummary = (
   isActive: false,
   coverImageAssetId: null,
   activeRevisionId: null,
+  hasPendingWrites: false,
   tagIds: [],
   assetIds: [],
   revisionIds: [],

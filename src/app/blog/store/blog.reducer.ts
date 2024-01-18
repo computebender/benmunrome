@@ -35,19 +35,11 @@ export const initialState: State = {
 
 const blogReducer = createReducer(
   initialState,
-  on(BlogActions.createArticle, (state, { article }) => ({
-    ...state,
-    articles: articleAdapter.addOne(article, state.articles),
-  })),
-  on(BlogActions.createArticleSuccess, (state, { optimisticId, article }) => ({
-    ...state,
-    articles: articleAdapter.removeOne(optimisticId, state.articles),
-  })),
-  on(BlogActions.createArticleFailure, (state, { optimisticId, error }) => ({
+  on(BlogActions.createArticleFailure, (state, { article, error }) => ({
     ...state,
     articles: articleAdapter.updateOne(
       {
-        id: optimisticId,
+        id: article.id,
         changes: {
           error,
         },
@@ -64,7 +56,7 @@ const blogReducer = createReducer(
     (state, { articles, tags, assets, revisions }) => ({
       ...state,
       isLoadingArticles: false,
-      articles: articleAdapter.upsertMany(articles, state.articles),
+      articles: articleAdapter.setAll(articles, state.articles),
       tags: tagAdapter.upsertMany(tags, state.tags),
       assets: assetAdapter.upsertMany(assets, state.assets),
       revisions: revisionAdapter.upsertMany(revisions, state.revisions),

@@ -11,4 +11,5 @@ export interface Article {
   assetIds: string[] | null;
   revisionIds: string[] | null;
   error?: string;
+  hasPendingWrites: boolean;
 }

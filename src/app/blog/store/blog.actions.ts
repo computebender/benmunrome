@@ -16,7 +16,7 @@ export const BlogActions = createActionGroup({
     }>(),
     loadArticlesFailure: props<{ error: unknown }>(),
     createArticle: props<{ article: Article }>(),
-    createArticleSuccess: props<{ optimisticId: string; article: Article }>(),
-    createArticleFailure: props<{ optimisticId: string; error: string }>(),
+    createArticleSuccess: props<{ article: Article }>(),
+    createArticleFailure: props<{ article: Article; error: string }>(),
   },
 });

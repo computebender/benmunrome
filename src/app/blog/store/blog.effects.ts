@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
+import { Timestamp } from '@angular/fire/firestore';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, mergeMap, of } from 'rxjs';
 import { BlogService } from '../service/blog.service';
-import {
-  manyArticleDtoToEntities,
-  oneArticleDtoToEntities,
-} from '../util/article-dto-to-entities.util';
+import { manyArticleDtoToEntities } from '../util/article-dto-to-entities.util';
 import { BlogActions } from './blog.actions';
 
 @Injectable()
@@ -23,20 +21,18 @@ export class BlogEffects {
             coverImageAsset: null,
             activeRevision: null,
             tags: [],
+            createdAt: Timestamp.now(),
           })
           .pipe(
-            map((articleDto) => {
-              const { article: createdArticle } =
-                oneArticleDtoToEntities(articleDto);
+            map((_) => {
               return BlogActions.createArticleSuccess({
-                optimisticId: article.id,
-                article: createdArticle,
+                article,
               });
             }),
             catchError((error) => {
               return of(
                 BlogActions.createArticleFailure({
-                  optimisticId: article.id,
+                  article,
                   error: error?.message || 'Unknown error',
                 }),
               );
