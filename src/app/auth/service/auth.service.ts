@@ -17,6 +17,7 @@ export class AuthService {
     const provider = new GoogleAuthProvider();
     return from(signInWithPopup(this.auth, provider)).pipe(
       map((result) => {
+        console.log(result);
         const uid = result.user.uid;
         return uid;
       }),
