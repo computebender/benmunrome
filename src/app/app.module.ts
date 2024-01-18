@@ -18,6 +18,7 @@ import { AuthModule } from './auth/auth.module';
 import { markedOptionsFactory } from './markdown.config';
 import { LoginComponent } from './view/login/login.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent],
@@ -28,6 +29,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     EffectsModule.forRoot([]),
     AuthModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    BrowserAnimationsModule,
   ],
   providers: [
     provideClientHydration(),
