@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -10,6 +11,9 @@ import { StoreModule } from '@ngrx/store';
 import { BlogModule } from '../blog/blog.module';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
+import { ArticleTableComponent } from './components/article-table/article-table.component';
+import { CreateArticleButtonComponent } from './components/create-article-button/create-article-button.component';
+import { CreateArticleModalComponent } from './components/create-article-modal/create-article-modal.component';
 import { MaterialModule } from './material.module';
 import { AdminEffects } from './store/admin.effects';
 import { adminFeature, adminFeatureKey } from './store/admin.reducer';
@@ -25,6 +29,9 @@ import { ManageTagsComponent } from './view/manage-tags/manage-tags.component';
     ManagePortfolioComponent,
     ManageHomepageComponent,
     ManageArticlesComponent,
+    CreateArticleModalComponent,
+    CreateArticleButtonComponent,
+    ArticleTableComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +45,7 @@ import { ManageTagsComponent } from './view/manage-tags/manage-tags.component';
     StoreModule.forFeature(adminFeatureKey, adminFeature.reducer),
     EffectsModule.forFeature([AdminEffects]),
     MaterialModule,
+    ReactiveFormsModule,
   ],
 })
 export class AdminModule {}

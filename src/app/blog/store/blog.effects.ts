@@ -48,7 +48,6 @@ export class BlogEffects {
       switchMap(() => {
         return this.blogService.getArticles().pipe(
           map((articleDtos) => {
-            console.log(articleDtos);
             const { articles, tags, assets, revisions } =
               manyArticleDtoToEntities(articleDtos);
             return BlogActions.loadArticlesSuccess({
@@ -59,7 +58,6 @@ export class BlogEffects {
             });
           }),
           catchError((error) => {
-            console.log(error);
             return of(
               BlogActions.loadArticlesFailure({
                 error: error?.message || 'Unknown error',
