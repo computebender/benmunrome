@@ -1,1 +1,34 @@
-<router-outlet></router-outlet>
+<mat-sidenav-container class="h-full">
+  <mat-sidenav
+    #drawer
+    class="max-w-52"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+  >
+    <mat-toolbar class="bg-inherit">benmunro.me</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="['homepage']">Homepage</a>
+      <a mat-list-item [routerLink]="['articles']">Articles</a>
+      <a mat-list-item [routerLink]="['tags']">Tags</a>
+      <a mat-list-item [routerLink]="['portfolio']">Portfolio</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content class="h-full">
+    <mat-toolbar color="primary">
+      @if (isHandset$ | async) {
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+        >
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+      }
+      <span>{{ title$ | async }}</span>
+    </mat-toolbar>
+    <router-outlet class="h-full"></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
