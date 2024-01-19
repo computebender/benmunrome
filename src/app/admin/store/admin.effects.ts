@@ -1,20 +1,24 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { routerNavigatedAction } from '@ngrx/router-store';
+import { Store } from '@ngrx/store';
 import { switchMap } from 'rxjs';
+import { selectRouteData } from '../../store/router.selectors';
 import { AdminActions } from './admin.actions';
 
 @Injectable()
 export class AdminEffects {
-  constructor(private actions$: Actions) {}
+  constructor(
+    private actions$: Actions,
+    private store: Store,
+  ) {}
 
   setTitleOnRouterNavigation$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(routerNavigatedAction),
-      switchMap((action) => {
-        const title = action.payload.routerState.root.firstChild?.firstChild
-          ?.firstChild?.data['title'] as string | 'Admin';
-
+      concatLatestFrom(() => this.store.select(selectRouteData)),
+      switchMap(([_, data]) => {
+        const title = data['title'] || 'Admin';
         return [AdminActions.setPageTitle({ title })];
       }),
     );

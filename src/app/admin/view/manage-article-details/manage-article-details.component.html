@@ -1,0 +1,9 @@
+<div *ngrxLet="article$ as article; suspenseTpl: loading" class="p-3">
+  <h2>{{ article?.title }}</h2>
+  <p>{{ article?.summary }}</p>
+  <p>{{ article?.isActive }}</p>
+</div>
+
+<ng-template #loading>
+  <p>Loading...</p>
+</ng-template>
