@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BlogActions } from '../../../blog/store/blog.actions';
 import { selectAllArticlesWithTags } from '../../../blog/store/blog.selectors';
+import { newArticleFromTitleSlugSummary } from '../../../blog/util/new-article-from-title-slug-summary.util';
 
 @Component({
   selector: 'app-manage-articles',
@@ -15,5 +16,14 @@ export class ManageArticlesComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(BlogActions.loadArticles());
+  }
+
+  handleCreateArticle() {
+    const article = newArticleFromTitleSlugSummary(
+      'Article Title',
+      'some-slug',
+      'Some summary',
+    );
+    this.store.dispatch(BlogActions.createArticle({ article }));
   }
 }

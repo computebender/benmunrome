@@ -56,7 +56,8 @@ export const oneArticleDtoToEntities = (
     throw new Error('ArticleDTO must have a uid');
 
   const articleId = articleDto.uid;
-  const tags = articleDto.tags.map((tag) => tagDtoToTagEntity(tag));
+  const tags = Object.values(articleDto.tags).map(tagDtoToTagEntity);
+  const tagIds = Object.keys(articleDto.tags);
   const coverImageAsset = articleDto.coverImageAsset
     ? assetDtoToAssetEntity(articleDto.coverImageAsset, articleId)
     : null;
@@ -76,7 +77,7 @@ export const oneArticleDtoToEntities = (
     coverImageAssetId: articleDto.coverImageAsset?.uid || null,
     activeRevisionId: articleDto.activeRevision?.uid || null,
     hasPendingWrites: articleDto.hasPendingWrites,
-    tagIds: tags.map((tag) => tag.id),
+    tagIds,
     assetIds,
     revisionIds,
   };
