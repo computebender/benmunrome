@@ -1,0 +1,34 @@
+<h2 mat-dialog-title>Create Article</h2>
+<mat-dialog-content>
+  <form
+    [formGroup]="profileForm"
+    class="flex w-80 max-w-full flex-col space-y-2"
+  >
+    <mat-form-field appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput id="title" formControlName="title" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Slug</mat-label>
+      <input matInput id="slug" formControlName="slug" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Summary</mat-label>
+      <textarea matInput id="summary" formControlName="summary"></textarea>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="handleClose()">Cancel</button>
+  <button
+    mat-button
+    color="primary"
+    [disabled]="!profileForm.valid"
+    (click)="handleSubmit()"
+  >
+    Submit
+  </button>
+</mat-dialog-actions>

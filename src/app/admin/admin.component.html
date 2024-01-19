@@ -1,4 +1,4 @@
-<mat-sidenav-container class="h-full">
+<mat-sidenav-container>
   <mat-sidenav
     #drawer
     class="max-w-52"
@@ -15,7 +15,7 @@
       <a mat-list-item [routerLink]="['portfolio']">Portfolio</a>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content class="h-full">
+  <mat-sidenav-content class="!flex !h-screen flex-col">
     <mat-toolbar color="primary">
       @if (isHandset$ | async) {
         <button
@@ -29,6 +29,8 @@
       }
       <span>{{ title$ | async }}</span>
     </mat-toolbar>
-    <router-outlet class="h-full"></router-outlet>
+    <div class="flex flex-1 flex-col">
+      <router-outlet></router-outlet>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
