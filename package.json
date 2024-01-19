@@ -31,6 +31,7 @@
     "@fortawesome/free-brands-svg-icons": "^6.4.2",
     "@fortawesome/free-regular-svg-icons": "^6.4.2",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "@ngrx/component": "^17.1.0",
     "@ngrx/effects": "^17.0.1",
     "@ngrx/entity": "^17.0.1",
     "@ngrx/operators": "^17.0.1",
