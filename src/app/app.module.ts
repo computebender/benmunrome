@@ -19,6 +19,7 @@ import { markedOptionsFactory } from './markdown.config';
 import { LoginComponent } from './view/login/login.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent],
@@ -30,6 +31,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AuthModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     BrowserAnimationsModule,
+    StoreRouterConnectingModule.forRoot(),
   ],
   providers: [
     provideClientHydration(),
