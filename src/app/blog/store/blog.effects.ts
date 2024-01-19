@@ -20,7 +20,7 @@ export class BlogEffects {
             isActive: article.isActive,
             coverImageAsset: null,
             activeRevision: null,
-            tags: [],
+            tags: {},
             createdAt: Timestamp.now(),
           })
           .pipe(

@@ -12,5 +12,5 @@ export interface ArticleDTO {
   createdAt: Timestamp;
   coverImageAsset: Required<AssetDTO> | null;
   activeRevision: Required<RevisionDTO> | null;
-  tags: Required<TagDTO>[];
+  tags: { [key: string]: Required<TagDTO> };
 }
