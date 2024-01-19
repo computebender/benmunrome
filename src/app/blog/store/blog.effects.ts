@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Timestamp } from '@angular/fire/firestore';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, mergeMap, of } from 'rxjs';
+import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
 import { BlogService } from '../service/blog.service';
 import { manyArticleDtoToEntities } from '../util/article-dto-to-entities.util';
 import { BlogActions } from './blog.actions';
@@ -45,7 +45,7 @@ export class BlogEffects {
   loadArticles$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(BlogActions.loadArticles),
-      mergeMap(() => {
+      switchMap(() => {
         return this.blogService.getArticles().pipe(
           map((articleDtos) => {
             console.log(articleDtos);

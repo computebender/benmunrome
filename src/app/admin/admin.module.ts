@@ -10,6 +10,7 @@ import { StoreModule } from '@ngrx/store';
 import { BlogModule } from '../blog/blog.module';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
+import { MaterialModule } from './material.module';
 import { AdminEffects } from './store/admin.effects';
 import { adminFeature, adminFeatureKey } from './store/admin.reducer';
 import { ManageArticlesComponent } from './view/manage-articles/manage-articles.component';
@@ -36,6 +37,7 @@ import { ManageTagsComponent } from './view/manage-tags/manage-tags.component';
     MatListModule,
     StoreModule.forFeature(adminFeatureKey, adminFeature.reducer),
     EffectsModule.forFeature([AdminEffects]),
+    MaterialModule,
   ],
 })
 export class AdminModule {}
