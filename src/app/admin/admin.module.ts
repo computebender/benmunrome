@@ -16,6 +16,8 @@ import { ArticleTableComponent } from './components/article-table/article-table.
 import { CreateArticleButtonComponent } from './components/create-article-button/create-article-button.component';
 import { CreateArticleModalComponent } from './components/create-article-modal/create-article-modal.component';
 import { CreateRevisionButtonComponent } from './components/create-revision-button/create-revision-button.component';
+import { CreateRevisionModalComponent } from './components/create-revision-modal/create-revision-modal.component';
+import { RevisionTableComponent } from './components/revision-table/revision-table.component';
 import { MaterialModule } from './material.module';
 import { AdminEffects } from './store/admin.effects';
 import { adminFeature, adminFeatureKey } from './store/admin.reducer';
@@ -37,6 +39,8 @@ import { ManageTagsComponent } from './view/manage-tags/manage-tags.component';
     ArticleTableComponent,
     ManageArticleDetailsComponent,
     CreateRevisionButtonComponent,
+    CreateRevisionModalComponent,
+    RevisionTableComponent,
   ],
   imports: [
     CommonModule,

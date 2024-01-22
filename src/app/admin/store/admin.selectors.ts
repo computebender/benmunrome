@@ -1,11 +1,18 @@
 import { createSelector } from '@ngrx/store';
-import { selectArticleEntities } from '../../blog/store/blog.reducer';
+import {
+  selectAllRevisions,
+  selectArticleEntities,
+} from '../../blog/store/blog.reducer';
 import { selectRouteParams } from '../../store/router.selectors';
 
 export const selectActiveArticleId = createSelector(
   selectRouteParams,
   (routeParams) => {
-    return routeParams['articleId'];
+    const articleId = routeParams['articleId'];
+    if (!articleId) {
+      return null;
+    }
+    return String(articleId);
   },
 );
 
@@ -17,5 +24,16 @@ export const selectActiveArticle = createSelector(
       return entities[articleId];
     }
     return null;
+  },
+);
+
+export const selectActiveArticleRevisions = createSelector(
+  selectActiveArticleId,
+  selectAllRevisions,
+  (articleId, revisions) => {
+    if (!articleId) {
+      return [];
+    }
+    return revisions.filter((revision) => revision.articleId === articleId);
   },
 );

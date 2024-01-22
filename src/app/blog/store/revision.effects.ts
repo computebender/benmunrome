@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Timestamp } from '@angular/fire/firestore';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, mergeMap, of } from 'rxjs';
+import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
 import { RevisionDTO } from '../dto/revision.dto';
 import { RevisionService } from '../service/revision.service';
 import { revisionDtoToRevisionEntity } from '../util/article-dto-to-entities.util';
@@ -47,7 +47,7 @@ export class RevisionEffects {
   loadRevisions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(BlogActions.loadRevisions),
-      mergeMap(({ articleId }) => {
+      switchMap(({ articleId }) => {
         return this.revisionService.getRevisions(articleId).pipe(
           map((revisions) => {
             const newRevisions = revisions.map((revision) =>
