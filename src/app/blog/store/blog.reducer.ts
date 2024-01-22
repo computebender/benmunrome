@@ -66,6 +66,34 @@ const blogReducer = createReducer(
     ...state,
     revisions: revisionAdapter.upsertMany(data.revisions, state.revisions),
   })),
+  on(
+    BlogActions.uploadRevisionFileProgress,
+    (state, { revision, progress }) => ({
+      ...state,
+      revisions: revisionAdapter.updateOne(
+        {
+          id: revision.id,
+          changes: {
+            uploadProgress: progress,
+          },
+        },
+        state.revisions,
+      ),
+    }),
+  ),
+  on(BlogActions.uploadRevisionFileFailure, (state, { revision, error }) => ({
+    ...state,
+    revisions: revisionAdapter.updateOne(
+      {
+        id: revision.id,
+        changes: {
+          uploadProgress: 0,
+          error,
+        },
+      },
+      state.revisions,
+    ),
+  })),
 );
 
 export const blogFeature = createFeature({

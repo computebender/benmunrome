@@ -11,4 +11,5 @@ export const newRevisionFromNote = (
   markdownPath: null,
   note,
   hasPendingWrites: false,
+  uploadProgress: null,
 });

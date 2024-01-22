@@ -24,5 +24,27 @@ export const BlogActions = createActionGroup({
     loadRevisions: props<{ articleId: string }>(),
     loadRevisionsSuccess: props<{ revisions: Revision[] }>(),
     loadRevisionsFailure: props<{ error: string }>(),
+    uploadRevisionFile: props<{ revision: Revision; file: File }>(),
+    uploadRevisionFileProgress: props<{
+      revision: Revision;
+      progress: number;
+    }>(),
+    uploadRevisionFileSuccess: props<{
+      revision: Revision;
+      markdownPath: string;
+    }>(),
+    uploadRevisionFileFailure: props<{ revision: Revision; error: string }>(),
+    setRevisionMarkdownPath: props<{
+      revision: Revision;
+      markdownPath: string;
+    }>(),
+    setRevisionMarkdownPathSuccess: props<{ revision: Revision }>(),
+    setRevisionMarkdownPathFailure: props<{
+      revision: Revision;
+      error: string;
+    }>(),
+    setActiveRevision: props<{ article: Article; revision: Revision }>(),
+    setActiveRevisionSuccess: props<{ article: Article }>(),
+    setActiveRevisionFailure: props<{ article: Article; error: string }>(),
   },
 });

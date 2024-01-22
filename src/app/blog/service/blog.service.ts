@@ -4,9 +4,12 @@ import {
   addDoc,
   collection,
   collectionSnapshots,
+  doc,
+  updateDoc,
 } from '@angular/fire/firestore';
 import { from, map } from 'rxjs';
 import { ArticleDTO } from '../dto/article.dto';
+import { RevisionDTO } from '../dto/revision.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -34,5 +37,15 @@ export class BlogService {
     const articlesCollection = collection(this.firestore, 'articles');
 
     return from(addDoc(articlesCollection, article));
+  }
+
+  setActiveRevision(articleId: string, revision: RevisionDTO) {
+    const articleDoc = doc(this.firestore, 'articles', articleId);
+
+    return from(
+      updateDoc(articleDoc, {
+        activeRevision: revision,
+      }),
+    );
   }
 }
