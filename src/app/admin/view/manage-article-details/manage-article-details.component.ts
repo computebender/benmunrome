@@ -1,5 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { BlogActions } from '../../../blog/store/blog.actions';
 import { selectActiveArticle } from '../../store/admin.selectors';
 
 @Component({
@@ -7,7 +8,11 @@ import { selectActiveArticle } from '../../store/admin.selectors';
   templateUrl: './manage-article-details.component.html',
   styleUrl: './manage-article-details.component.scss',
 })
-export class ManageArticleDetailsComponent {
+export class ManageArticleDetailsComponent implements OnInit {
   store = inject(Store);
   article$ = this.store.select(selectActiveArticle);
+
+  ngOnInit(): void {
+    this.store.dispatch(BlogActions.loadArticles());
+  }
 }

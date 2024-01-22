@@ -13,4 +13,5 @@ export interface ArticleDTO {
   coverImageAsset: Required<AssetDTO> | null;
   activeRevision: Required<RevisionDTO> | null;
   tags: { [key: string]: Required<TagDTO> };
+  hasPendingWrites?: boolean;
 }

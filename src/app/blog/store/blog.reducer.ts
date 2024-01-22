@@ -56,12 +56,16 @@ const blogReducer = createReducer(
     (state, { articles, tags, assets, revisions }) => ({
       ...state,
       isLoadingArticles: false,
-      articles: articleAdapter.setAll(articles, state.articles),
+      articles: articleAdapter.upsertMany(articles, state.articles),
       tags: tagAdapter.upsertMany(tags, state.tags),
       assets: assetAdapter.upsertMany(assets, state.assets),
       revisions: revisionAdapter.upsertMany(revisions, state.revisions),
     }),
   ),
+  on(BlogActions.loadRevisionsSuccess, (state, data) => ({
+    ...state,
+    revisions: revisionAdapter.upsertMany(data.revisions, state.revisions),
+  })),
 );
 
 export const blogFeature = createFeature({
@@ -89,6 +93,13 @@ export const {
   selectIds: selectAssetIds,
   selectTotal: selectTotalAssets,
 } = assetAdapter.getSelectors(blogFeature.selectAssets);
+
+export const {
+  selectAll: selectAllRevisions,
+  selectEntities: selectRevisionEntities,
+  selectIds: selectRevisionIds,
+  selectTotal: selectTotalRevisions,
+} = revisionAdapter.getSelectors(blogFeature.selectRevisions);
 
 export const {
   reducer,

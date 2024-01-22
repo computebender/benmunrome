@@ -5,4 +5,5 @@ export interface AssetDTO {
   name: string;
   path: string;
   createdAt: Timestamp;
+  hasPendingWrites?: boolean;
 }

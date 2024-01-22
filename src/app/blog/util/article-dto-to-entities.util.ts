@@ -8,10 +8,16 @@ import { DtoRead } from '../model/dto-read.model';
 import { Revision } from '../model/revision.model';
 import { Tag } from '../model/tag.model';
 
-const revisionDtoToRevisionEntity = (
-  revisionDto: Required<RevisionDTO>,
+export const revisionDtoToRevisionEntity = (
+  revisionDto: RevisionDTO,
   articleId: string,
 ): Revision => {
+  if (revisionDto.uid === undefined)
+    throw new Error('RevisionDTO must have a uid');
+
+  if (revisionDto.hasPendingWrites === undefined)
+    throw new Error('RevisionDTO must have property hasPendingWrites');
+
   return {
     id: revisionDto.uid,
     createdAt: revisionDto.createdAt.toDate(),
@@ -19,6 +25,7 @@ const revisionDtoToRevisionEntity = (
     note: revisionDto.note,
     articleId,
     firestoreId: revisionDto.uid,
+    hasPendingWrites: revisionDto.hasPendingWrites,
   };
 };
 
@@ -45,7 +52,7 @@ const tagDtoToTagEntity = (articleTagDto: Required<TagDTO>): Tag => {
 };
 
 export const oneArticleDtoToEntities = (
-  articleDto: ArticleDTO & DtoRead,
+  articleDto: ArticleDTO,
 ): {
   article: Article;
   tags: Tag[];
@@ -54,6 +61,9 @@ export const oneArticleDtoToEntities = (
 } => {
   if (articleDto.uid === undefined)
     throw new Error('ArticleDTO must have a uid');
+
+  if (articleDto.hasPendingWrites === undefined)
+    throw new Error('ArticleDTO must have property hasPendingWrites');
 
   const articleId = articleDto.uid;
   const tags = Object.values(articleDto.tags).map(tagDtoToTagEntity);
