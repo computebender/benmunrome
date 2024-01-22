@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>Create Revision</h2>
+<mat-dialog-content>
+  <form [formGroup]="revisionForm" class="flex w-80 max-w-full flex-col">
+    <mat-form-field appearance="fill">
+      <mat-label>Note</mat-label>
+      <textarea matInput id="note" formControlName="note"></textarea>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="handleClose()">Cancel</button>
+  <button
+    mat-button
+    color="primary"
+    [disabled]="!revisionForm.valid"
+    (click)="handleSubmit()"
+  >
+    Submit
+  </button>
+</mat-dialog-actions>

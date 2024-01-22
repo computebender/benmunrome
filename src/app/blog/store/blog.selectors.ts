@@ -1,5 +1,9 @@
 import { createSelector } from '@ngrx/store';
-import { selectAllArticles, selectTagEntities } from './blog.reducer';
+import {
+  selectAllArticles,
+  selectAllRevisions,
+  selectTagEntities,
+} from './blog.reducer';
 
 export const selectAllArticlesWithTags = createSelector(
   selectAllArticles,
@@ -11,3 +15,10 @@ export const selectAllArticlesWithTags = createSelector(
     }));
   },
 );
+
+export const selectArticleRevisionsByArticleId = (activeArticleId: string) =>
+  createSelector(selectAllRevisions, (revisions) => {
+    return revisions.filter(
+      (revision) => revision.articleId === activeArticleId,
+    );
+  });

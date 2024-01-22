@@ -18,5 +18,11 @@ export const BlogActions = createActionGroup({
     createArticle: props<{ article: Article }>(),
     createArticleSuccess: props<{ article: Article }>(),
     createArticleFailure: props<{ article: Article; error: string }>(),
+    createRevision: props<{ revision: Revision }>(),
+    createRevisionSuccess: props<{ revision: Revision }>(),
+    createRevisionFailure: props<{ revision: Revision; error: string }>(),
+    loadRevisions: props<{ articleId: string }>(),
+    loadRevisionsSuccess: props<{ revisions: Revision[] }>(),
+    loadRevisionsFailure: props<{ error: string }>(),
   },
 });

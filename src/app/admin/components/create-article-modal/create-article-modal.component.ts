@@ -1,7 +1,8 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
+import { Subject, takeUntil } from 'rxjs';
 import { BlogActions } from '../../../blog/store/blog.actions';
 import { newArticleFromTitleSlugSummary } from '../../../blog/util/new-article-from-title-slug-summary.util';
 
@@ -10,11 +11,13 @@ import { newArticleFromTitleSlugSummary } from '../../../blog/util/new-article-f
   templateUrl: './create-article-modal.component.html',
   styleUrl: './create-article-modal.component.scss',
 })
-export class CreateArticleModalComponent implements OnInit {
+export class CreateArticleModalComponent implements OnInit, OnDestroy {
   public dialogRef = inject(MatDialogRef<CreateArticleModalComponent>);
   store = inject(Store);
 
-  profileForm = new FormGroup({
+  onDestroy$ = new Subject<void>();
+
+  articleForm = new FormGroup({
     title: new FormControl('', Validators.required),
     slug: new FormControl('', [
       Validators.required,
@@ -24,20 +27,27 @@ export class CreateArticleModalComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    const slugControl = this.profileForm.get('slug');
+    const slugControl = this.articleForm.get('slug');
     if (slugControl) {
-      slugControl.valueChanges.subscribe((value) => {
-        if (!value) {
-          return;
-        }
-        this.updateSlug(value);
-      });
+      slugControl.valueChanges
+        .pipe(takeUntil(this.onDestroy$))
+        .subscribe((value) => {
+          if (!value) {
+            return;
+          }
+          this.updateSlug(value);
+        });
     }
+  }
+
+  ngOnDestroy(): void {
+    this.onDestroy$.next();
+    this.onDestroy$.complete();
   }
 
   private updateSlug(value: string) {
     const transformedValue = value.replace(/\s+/g, '-').toLowerCase();
-    this.profileForm
+    this.articleForm
       .get('slug')!
       .setValue(transformedValue, { emitEvent: false });
   }
@@ -47,7 +57,7 @@ export class CreateArticleModalComponent implements OnInit {
   }
 
   handleSubmit() {
-    const { title, slug, summary } = this.profileForm.value;
+    const { title, slug, summary } = this.articleForm.value;
 
     if (!title || !slug || !summary) {
       return;
