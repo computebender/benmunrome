@@ -4,6 +4,10 @@
   <p>{{ article?.isActive }}</p>
 </div>
 
+@for (revision of revisions$ | async; track $index) {
+  <h2>{{ revision.note }}</h2>
+}
+
 <ng-template #loading>
   <p>Loading...</p>
 </ng-template>
