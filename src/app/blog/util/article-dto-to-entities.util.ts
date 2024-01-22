@@ -26,6 +26,7 @@ export const revisionDtoToRevisionEntity = (
     articleId,
     firestoreId: revisionDto.uid,
     hasPendingWrites: revisionDto.hasPendingWrites,
+    uploadProgress: null,
   };
 };
 
@@ -51,6 +52,25 @@ const tagDtoToTagEntity = (articleTagDto: Required<TagDTO>): Tag => {
   };
 };
 
+export const activeRevisionToRevisionEntity = (
+  revisionDto: RevisionDTO,
+  articleId: string,
+): Revision => {
+  if (revisionDto.uid === undefined)
+    throw new Error('RevisionDTO must have a uid');
+
+  return {
+    id: revisionDto.uid,
+    createdAt: revisionDto.createdAt.toDate(),
+    markdownPath: revisionDto.markdownPath,
+    note: revisionDto.note,
+    articleId,
+    firestoreId: revisionDto.uid,
+    hasPendingWrites: false,
+    uploadProgress: null,
+  };
+};
+
 export const oneArticleDtoToEntities = (
   articleDto: ArticleDTO,
 ): {
@@ -72,7 +92,7 @@ export const oneArticleDtoToEntities = (
     ? assetDtoToAssetEntity(articleDto.coverImageAsset, articleId)
     : null;
   const activeRevision = articleDto.activeRevision
-    ? revisionDtoToRevisionEntity(articleDto.activeRevision, articleId)
+    ? activeRevisionToRevisionEntity(articleDto.activeRevision, articleId)
     : null;
 
   const assetIds = coverImageAsset != null ? [coverImageAsset.id] : null;

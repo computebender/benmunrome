@@ -68,4 +68,59 @@ export class RevisionEffects {
       }),
     );
   });
+
+  uploadRevisionFile$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(BlogActions.uploadRevisionFile),
+      mergeMap(({ revision, file }) => {
+        return this.revisionService.uploadRevisionFile(revision, file).pipe(
+          map((progress) => {
+            if (progress.markdownPath !== undefined) {
+              return BlogActions.uploadRevisionFileSuccess({
+                revision,
+                markdownPath: progress.markdownPath,
+              });
+            }
+            return BlogActions.uploadRevisionFileProgress({
+              revision,
+              progress: progress.progress,
+            });
+          }),
+          catchError((error) => {
+            return of(
+              BlogActions.uploadRevisionFileFailure({
+                revision,
+                error: error?.message || 'Unknown error',
+              }),
+            );
+          }),
+        );
+      }),
+    );
+  });
+
+  setRevisionMarkdownPath$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(BlogActions.uploadRevisionFileSuccess),
+      mergeMap(({ revision, markdownPath }) => {
+        return this.revisionService
+          .setRevisionMarkdownPath(revision, markdownPath)
+          .pipe(
+            map((_) => {
+              return BlogActions.setRevisionMarkdownPathSuccess({
+                revision,
+              });
+            }),
+            catchError((error) => {
+              return of(
+                BlogActions.setRevisionMarkdownPathFailure({
+                  revision,
+                  error: error?.message || 'Unknown error',
+                }),
+              );
+            }),
+          );
+      }),
+    );
+  });
 }

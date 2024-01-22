@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Timestamp } from '@angular/fire/firestore';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
+import { RevisionDTO } from '../dto/revision.dto';
 import { BlogService } from '../service/blog.service';
 import { manyArticleDtoToEntities } from '../util/article-dto-to-entities.util';
 import { BlogActions } from './blog.actions';
@@ -60,6 +61,35 @@ export class BlogEffects {
           catchError((error) => {
             return of(
               BlogActions.loadArticlesFailure({
+                error: error?.message || 'Unknown error',
+              }),
+            );
+          }),
+        );
+      }),
+    );
+  });
+
+  setActiveRevision$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(BlogActions.setActiveRevision),
+      mergeMap(({ article, revision }) => {
+        const revisionDto: RevisionDTO = {
+          uid: revision.id,
+          createdAt: Timestamp.fromDate(revision.createdAt),
+          markdownPath: revision.markdownPath,
+          note: revision.note,
+        };
+        return this.blogService.setActiveRevision(article.id, revisionDto).pipe(
+          map((_) => {
+            return BlogActions.setActiveRevisionSuccess({
+              article,
+            });
+          }),
+          catchError((error) => {
+            return of(
+              BlogActions.setActiveRevisionFailure({
+                article,
                 error: error?.message || 'Unknown error',
               }),
             );

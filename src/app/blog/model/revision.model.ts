@@ -6,4 +6,6 @@ export interface Revision {
   articleId: string;
   firestoreId?: string;
   hasPendingWrites: boolean;
+  uploadProgress: number | null;
+  error?: string;
 }

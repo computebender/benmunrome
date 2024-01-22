@@ -38,7 +38,6 @@ export class AdminEffects {
         if (!articleId) {
           return EMPTY;
         }
-        console.log('Loading revisions for ', articleId);
         return of(BlogActions.loadRevisions({ articleId }));
       }),
     );
