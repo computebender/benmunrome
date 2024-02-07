@@ -23,6 +23,4 @@
 </div>
 <hr class="mx-2 my-4 h-px border-0 bg-slate-200" />
 
-<app-article-card-grid
-  [articles]="blogStore.activeTagFilteredArticlesByDate()"
-/>
+<app-article-card-grid [compositeArticles]="articles()" />

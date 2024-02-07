@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
+import { Article } from '../../../blog/model/article.model';
+import { Tag } from '../../../blog/model/tag.model';
 import { ArticleCardComponent } from '../article-card/article-card.component';
-import { Article, ArticleWithTags } from '../../model/article.model';
+
 
 @Component({
   selector: 'app-article-card-grid',
@@ -10,5 +12,5 @@ import { Article, ArticleWithTags } from '../../model/article.model';
   styleUrl: './article-card-grid.component.scss',
 })
 export class ArticleCardGridComponent {
-  @Input({ required: true }) articles!: ArticleWithTags[];
+  @Input({ required: true }) compositeArticles: (Article & { coverImageUrl?: string; tags: Tag[] })[] = [];
 }

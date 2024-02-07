@@ -1,10 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { RouterLinkWithHref } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { BlogActions } from '../../../blog/store/blog.actions';
+import { selectAllUIArticles } from '../../../blog/store/selectors/blog.selectors';
 import { ArticleCardGridComponent } from '../../component/article-card-grid/article-card-grid.component';
-import { Article } from '../../model/article.model';
-import { ArticleService } from '../../service/article.service';
 import { WelcomeBannerComponent } from '../../component/welcome-banner/welcome-banner.component';
-import { BlogStore } from '../../store/blog.store';
 
 @Component({
   selector: 'app-home',
@@ -18,9 +18,10 @@ import { BlogStore } from '../../store/blog.store';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnInit {
-  readonly blogStore = inject(BlogStore);
+  private readonly store = inject(Store);
+  articles = this.store.selectSignal(selectAllUIArticles);
 
   ngOnInit() {
-    this.blogStore.loadFeatuedArticleIds();
+    this.store.dispatch(BlogActions.loadArticles());
   }
 }

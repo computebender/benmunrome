@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BlogActions } from '../../../blog/store/blog.actions';
-import { selectAllArticlesWithTags } from '../../../blog/store/blog.selectors';
+import { selectAllUIArticles } from '../../../blog/store/selectors/blog.selectors';
 
 @Component({
   selector: 'app-article-table',
@@ -10,7 +10,7 @@ import { selectAllArticlesWithTags } from '../../../blog/store/blog.selectors';
 })
 export class ArticleTableComponent {
   store = inject(Store);
-  articles$ = this.store.select(selectAllArticlesWithTags);
+  articles$ = this.store.select(selectAllUIArticles);
   displayedColumns: string[] = ['title', 'summary', 'isActive'];
 
   ngOnInit(): void {
