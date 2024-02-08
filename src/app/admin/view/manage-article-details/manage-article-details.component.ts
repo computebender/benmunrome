@@ -4,7 +4,7 @@ import { BlogActions } from '../../../blog/store/blog.actions';
 import {
   selectActiveArticle,
   selectActiveArticleActiveRevision,
-} from '../../store/admin.selectors';
+} from '../../../blog/store/selectors/active-article.selectors';
 
 @Component({
   selector: 'app-manage-article-details',

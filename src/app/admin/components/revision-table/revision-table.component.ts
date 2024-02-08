@@ -6,7 +6,7 @@ import { BlogActions } from '../../../blog/store/blog.actions';
 import {
   selectActiveArticle,
   selectActiveArticleRevisions,
-} from '../../store/admin.selectors';
+} from '../../../blog/store/selectors/active-article.selectors';
 
 @Component({
   selector: 'app-revision-table',

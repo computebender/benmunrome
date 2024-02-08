@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Timestamp } from '@angular/fire/firestore';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
+import { routerNavigatedAction } from '@ngrx/router-store';
+import { Store } from '@ngrx/store';
+import { EMPTY, catchError, distinctUntilChanged, map, mergeMap, of, switchMap } from 'rxjs';
 import { RevisionDTO } from '../dto/revision.dto';
 import { BlogService } from '../service/blog.service';
 import { manyArticleDtoToEntities } from '../util/article-dto-to-entities.util';
 import { BlogActions } from './blog.actions';
+import { selectActiveArticleId } from './selectors/active-article.selectors';
 
 @Injectable()
 export class BlogEffects {
@@ -99,8 +102,26 @@ export class BlogEffects {
     );
   });
 
+  loadArticleOnRouterNavigation$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(routerNavigatedAction),
+      concatLatestFrom(() => this.store.select(selectActiveArticleId)),
+      distinctUntilChanged(
+        ([, previousArticleId], [, currentArticleId]) =>
+          previousArticleId === currentArticleId,
+      ),
+      switchMap(([_, articleId]) => {
+        if (!articleId) {
+          return EMPTY;
+        }
+        return of(BlogActions.loadArticles());
+      }),
+    );
+  });
+
   constructor(
     private actions$: Actions,
     private blogService: BlogService,
+    private store: Store
   ) {}
 }

@@ -4,9 +4,9 @@ import { routerNavigatedAction } from '@ngrx/router-store';
 import { Store } from '@ngrx/store';
 import { EMPTY, distinctUntilChanged, of, switchMap } from 'rxjs';
 import { BlogActions } from '../../blog/store/blog.actions';
+import { selectActiveArticleId } from '../../blog/store/selectors/active-article.selectors';
 import { selectRouteData } from '../../store/router.selectors';
 import { AdminActions } from './admin.actions';
-import { selectActiveArticleId } from './admin.selectors';
 
 @Injectable()
 export class AdminEffects {

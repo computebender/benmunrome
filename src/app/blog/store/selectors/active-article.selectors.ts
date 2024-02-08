@@ -1,9 +1,9 @@
 import { createSelector } from '@ngrx/store';
+import { selectRouteParams } from '../../../store/router.selectors';
 import {
   selectAllRevisions,
   selectArticleEntities,
-} from '../../blog/store/blog.reducer';
-import { selectRouteParams } from '../../store/router.selectors';
+} from '../blog.reducer';
 
 export const selectActiveArticleId = createSelector(
   selectRouteParams,
