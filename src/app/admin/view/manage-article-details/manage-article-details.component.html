@@ -6,4 +6,7 @@
   </div>
   <app-revision-table />
 </div>
+<div *ngrxLet="activeRevision$ as activeRevision" class="p-3">
+  <markdown [src]="activeRevision?.markdownPath"></markdown>
+</div>
 <app-create-revision-button />

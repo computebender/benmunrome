@@ -9,6 +9,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { LetDirective } from '@ngrx/component';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { MarkdownModule } from 'ngx-markdown';
 import { BlogModule } from '../blog/blog.module';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
@@ -56,6 +57,7 @@ import { ManageTagsComponent } from './view/manage-tags/manage-tags.component';
     MaterialModule,
     ReactiveFormsModule,
     LetDirective,
+    MarkdownModule,
   ],
 })
 export class AdminModule {}

@@ -1,12 +1,13 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 // Import your components for the child routes
+import { BlogModule } from '../blog/blog.module';
+import { FooterComponent } from './component/footer/footer.component';
+import { NavbarComponent } from './component/navbar/navbar.component';
 import { PublicComponent } from './public.component';
 import { HomeComponent } from './view/home/home.component';
-import { NavbarComponent } from './component/navbar/navbar.component';
-import { FooterComponent } from './component/footer/footer.component';
 
 // Define your child routes
 const routes: Routes = [
@@ -60,6 +61,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     NavbarComponent,
     FooterComponent,
+    BlogModule
   ],
 })
 export class PublicModule {}

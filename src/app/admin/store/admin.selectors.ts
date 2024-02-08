@@ -37,3 +37,18 @@ export const selectActiveArticleRevisions = createSelector(
     return revisions.filter((revision) => revision.articleId === articleId);
   },
 );
+
+export const selectActiveArticleActiveRevision = createSelector(
+  selectActiveArticle,
+  selectActiveArticleRevisions,
+  (article, revisions) => {
+    if (!article) {
+      return null;
+    }
+    const activeRevisionId = article.activeRevisionId;
+    if (!activeRevisionId) {
+      return null;
+    }
+    return revisions.find((revision) => revision.id === activeRevisionId);
+  },
+);
