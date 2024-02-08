@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs';
-import { selectActiveArticle } from '../../store/admin.selectors';
+import { selectActiveArticle } from '../../../blog/store/selectors/active-article.selectors';
 import { CreateRevisionModalComponent } from '../create-revision-modal/create-revision-modal.component';
 
 @Component({

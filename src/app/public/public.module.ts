@@ -61,7 +61,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     NavbarComponent,
     FooterComponent,
-    BlogModule
+    BlogModule,
   ],
 })
 export class PublicModule {}
